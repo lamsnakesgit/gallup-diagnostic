@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallup CliftonStrengths Real Simulator (Top-5 / Top-10 & x10 Leverage)</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @keyframes pulse-fast {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.03); }
+    }
+    .urgent-timer {
+      animation: pulse-fast 0.6s infinite ease-in-out;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      height: 28px;
+      width: 28px;
+      border-radius: 50%;
+      background: #6366f1;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
+      margin-top: -10px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased flex flex-col items-center justify-start p-4 sm:p-6 font-sans">
+
+  <!-- HEADER -->
+  <header class="w-full max-w-3xl flex items-center justify-between py-4 border-b border-slate-800 mb-6">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-amber-500 flex items-center justify-center font-black text-xl shadow-lg shadow-indigo-500/20">
+        G
+      </div>
+      <div>
+        <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+          Gallup CliftonStrengths <span class="text-xs px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 font-semibold">Real Engine</span>
+        </h1>
+        <p class="text-xs text-slate-400">Психометрический симулятор: 20s таймер • Top-5 / Top-10 • x10 ROI</p>
+      </div>
+    </div>
+    <div class="text-right">
+      <span class="text-xs uppercase tracking-wider text-indigo-400 font-medium">Executive Diagnostic</span>
+      <div class="text-xs text-emerald-400 font-semibold flex items-center justify-end gap-1">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Психометрика 2.0
+      </div>
+    </div>
+  </header>
+
+  <!-- APP CONTAINER -->
+  <main class="w-full max-w-3xl">
+
+    <!-- SCREEN 1: INTRO & MODE SELECT -->
+    <section id="screen-intro" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-sm">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-4">
+        💎 Научная методология CliftonStrengths
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+        Как работает реальный Gallup и как он раскрывает x10 потенциал
+      </h2>
+      <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+        Официальный опросник Gallup построен на 177 парах утверждений с лимитом ровно <b>20 секунд</b> на ответ. Это сделано для того, чтобы <b>отключить социальные фильтры</b> и зафиксировать естественные нейронные реакции мышления и лидерства.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50">
+          <div class="text-slate-200 font-bold text-sm mb-1">🎯 Фокус на сильных сторонах:</div>
+          <p class="text-xs text-slate-400 leading-normal">
+            Инвестиция времени в Top-5 талантов дает результат 10/10 — монопольное рыночное преимущество и максимальную маржинальность.
+          </p>
+        </div>
+        <div class="p-4 rounded-xl bg-indigo-950/40 border border-indigo-500/30">
+          <div class="text-indigo-400 font-bold text-sm mb-1">🛡 Защита от слепых зон:</div>
+          <p class="text-xs text-slate-300 leading-normal">
+            Выявление нижних талантов (Blind Spots) позволяет делегировать или автоматизировать рутину, предотвращая слив ресурсов и выгорание.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-3 mb-8">
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Выберите режим тестирования:</label>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <button onclick="startTest(20)" class="text-left p-3.5 rounded-xl border border-slate-700 hover:border-indigo-500 bg-slate-800/50 hover:bg-indigo-600/10 transition-all cursor-pointer group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-white text-xs group-hover:text-indigo-300">⚡ Быстрый срез</span>
+              <span class="text-[10px] bg-slate-700 text-slate-300 font-bold px-1.5 py-0.5 rounded">20 пар</span>
+            </div>
+            <div class="text-[11px] text-indigo-400 font-semibold mb-1">~5 минут</div>
+            <p class="text-[11px] text-slate-400 leading-normal">
+              Экспресс-оценка доменов и Top-5.
+            </p>
+          </button>
+
+          <button onclick="startTest(40)" class="text-left p-3.5 rounded-xl border border-slate-700 hover:border-purple-500 bg-slate-800/50 hover:bg-purple-600/10 transition-all cursor-pointer group">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-white text-xs group-hover:text-purple-300">🎯 Глубокий аудит</span>
+              <span class="text-[10px] bg-slate-700 text-slate-300 font-bold px-1.5 py-0.5 rounded">40 пар</span>
+            </div>
+            <div class="text-[11px] text-purple-400 font-semibold mb-1">~12 минут</div>
+            <p class="text-[11px] text-slate-400 leading-normal">
+              Точная калибровка Золотой десятки (Top-10).
+            </p>
+          </button>
+
+          <button onclick="startTest(177)" class="text-left p-3.5 rounded-xl border-2 border-indigo-500 bg-indigo-950/40 hover:bg-indigo-900/40 transition-all cursor-pointer group shadow-lg shadow-indigo-600/20">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-extrabold text-white text-xs group-hover:text-amber-300">🏆 Полный Gallup</span>
+              <span class="text-[10px] bg-indigo-600 text-white font-bold px-1.5 py-0.5 rounded">177 пар</span>
+            </div>
+            <div class="text-[11px] text-emerald-400 font-semibold mb-1">~35–45 минут</div>
+            <p class="text-[11px] text-slate-300 leading-normal">
+              Официальный стандарт со строгим таймером 20 сек.
+            </p>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-4 border-t border-slate-800 text-xs text-slate-400">
+        <span>⏱ 20 секунд на вопрос (с авто-переходом)</span>
+        <span>🔒 Полная конфиденциальность</span>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: ACTIVE QUESTION TEST -->
+    <section id="screen-test" class="hidden bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+      
+      <!-- PROGRESS & TIMER BAR -->
+      <div class="mb-6">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400" id="progress-text">
+            Вопрос 1 из 20
+          </span>
+          <div class="flex items-center gap-2 font-mono font-bold text-sm" id="timer-display-box">
+            <span class="text-xs text-slate-400">Таймер:</span>
+            <span id="timer-seconds" class="px-2.5 py-0.5 rounded-lg bg-slate-800 text-emerald-400 border border-slate-700 text-base">20.0s</span>
+          </div>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden mb-1">
+          <div id="test-progress-bar" class="bg-indigo-600 h-full transition-all duration-300" style="width: 5%;"></div>
+        </div>
+        <!-- QUESTION TIMER BAR -->
+        <div class="w-full bg-slate-800/60 h-1.5 rounded-full overflow-hidden">
+          <div id="question-timer-bar" class="bg-emerald-500 h-full transition-all duration-100 ease-linear" style="width: 100%;"></div>
+        </div>
+      </div>
+
+      <!-- QUESTION PAIR CARD -->
+      <div class="my-8">
+        <p class="text-xs uppercase font-bold text-center text-indigo-400 mb-6 tracking-wider">
+          Что лучше описывает ваш естественный стиль поведения?
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <!-- STATEMENT A (LEFT) -->
+          <div id="card-stmt-a" class="p-5 rounded-2xl bg-slate-800/80 border-2 border-slate-700/60 transition-all flex flex-col justify-between hover:border-indigo-500/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-700 text-slate-300">Вариант А</span>
+              <span class="text-xs text-indigo-400 font-semibold" id="domain-badge-a">Домен</span>
+            </div>
+            <p id="stmt-text-a" class="text-base sm:text-lg font-medium text-white leading-snug">
+              Текст утверждения А
+            </p>
+          </div>
+
+          <!-- STATEMENT B (RIGHT) -->
+          <div id="card-stmt-b" class="p-5 rounded-2xl bg-slate-800/80 border-2 border-slate-700/60 transition-all flex flex-col justify-between hover:border-purple-500/50">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-700 text-slate-300">Вариант Б</span>
+              <span class="text-xs text-purple-400 font-semibold" id="domain-badge-b">Домен</span>
+            </div>
+            <p id="stmt-text-b" class="text-base sm:text-lg font-medium text-white leading-snug">
+              Текст утверждения Б
+            </p>
+          </div>
+        </div>
+
+        <!-- 5-POINT FORCED CHOICE BUTTONS (GALLUP STYLE) -->
+        <div class="space-y-3">
+          <div class="flex justify-between text-xs text-slate-400 font-medium px-2">
+            <span>◄ Полностью Вариант А</span>
+            <span class="text-slate-500">Посередине / Равно</span>
+            <span>Полностью Вариант Б ►</span>
+          </div>
+
+          <div class="grid grid-cols-5 gap-2 sm:gap-3">
+            <button onclick="submitAnswer(1)" class="py-4 px-2 rounded-xl bg-slate-800 hover:bg-indigo-600 border border-slate-700 hover:border-indigo-400 transition-all text-center group cursor-pointer">
+              <div class="text-sm font-bold text-slate-200 group-hover:text-white">1</div>
+              <div class="text-[11px] text-slate-400 group-hover:text-indigo-100 hidden sm:block">Точно А</div>
+            </button>
+            <button onclick="submitAnswer(2)" class="py-4 px-2 rounded-xl bg-slate-800 hover:bg-indigo-700/70 border border-slate-700 hover:border-indigo-500 transition-all text-center group cursor-pointer">
+              <div class="text-sm font-bold text-slate-200 group-hover:text-white">2</div>
+              <div class="text-[11px] text-slate-400 group-hover:text-indigo-100 hidden sm:block">Скорее А</div>
+            </button>
+            <button onclick="submitAnswer(3)" class="py-4 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-500 transition-all text-center group cursor-pointer">
+              <div class="text-sm font-bold text-slate-300 group-hover:text-white">3</div>
+              <div class="text-[11px] text-slate-400 group-hover:text-slate-200 hidden sm:block">Нейтрально</div>
+            </button>
+            <button onclick="submitAnswer(4)" class="py-4 px-2 rounded-xl bg-slate-800 hover:bg-purple-700/70 border border-slate-700 hover:border-purple-500 transition-all text-center group cursor-pointer">
+              <div class="text-sm font-bold text-slate-200 group-hover:text-white">4</div>
+              <div class="text-[11px] text-slate-400 group-hover:text-purple-100 hidden sm:block">Скорее Б</div>
+            </button>
+            <button onclick="submitAnswer(5)" class="py-4 px-2 rounded-xl bg-slate-800 hover:bg-purple-600 border border-slate-700 hover:border-purple-400 transition-all text-center group cursor-pointer">
+              <div class="text-sm font-bold text-slate-200 group-hover:text-white">5</div>
+              <div class="text-[11px] text-slate-400 group-hover:text-purple-100 hidden sm:block">Точно Б</div>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex items-center justify-between text-xs text-slate-500 pt-4 border-t border-slate-800">
+        <span>Совет: Не думайте дольше 5 секунд — первая мысль самая точная</span>
+        <button onclick="skipQuestion()" class="text-slate-400 hover:text-white underline cursor-pointer">
+          Пропустить (нейтрально)
+        </button>
+      </div>
+
+    </section>
+
+    <!-- SCREEN 3: DETAILED RESULTS & X10 ACTION PLAN -->
+    <section id="screen-results" class="hidden space-y-6">
+
+      <!-- TOP BANNER -->
+      <div class="bg-gradient-to-r from-indigo-900/90 via-purple-900/80 to-slate-900 border border-indigo-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
+        <div class="flex items-center gap-2 text-xs font-bold text-indigo-300 uppercase tracking-widest mb-2">
+          🏆 Персональный профиль CliftonStrengths
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">
+          Ваша Золотая Пятерка (Signature Themes) & x10 Стратегия
+        </h2>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          Тест завершен. Психометрический движок обработал ваши инстинктивные выборы и выделил доминантные зоны гениальности.
+        </p>
+      </div>
+
+      <!-- 4 DOMAINS RADAR/DISTRIBUTION -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+        <h3 class="text-base font-bold text-white mb-4 flex items-center justify-between">
+          <span>Распределение по 4 Доменам Лидерства</span>
+          <span class="text-xs text-slate-400 font-normal">Баланс энергии</span>
+        </h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center" id="domain-distribution-cards">
+          <!-- Executing -->
+          <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700/60">
+            <div class="text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-1">Исполнение</div>
+            <div class="text-2xl font-black text-white" id="score-executing">0%</div>
+            <div class="text-[11px] text-slate-400 mt-1">Executing</div>
+          </div>
+          <!-- Influencing -->
+          <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700/60">
+            <div class="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">Влияние</div>
+            <div class="text-2xl font-black text-white" id="score-influencing">0%</div>
+            <div class="text-[11px] text-slate-400 mt-1">Influencing</div>
+          </div>
+          <!-- Relationship -->
+          <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700/60">
+            <div class="text-xs font-semibold text-blue-400 uppercase tracking-wider mb-1">Отношения</div>
+            <div class="text-2xl font-black text-white" id="score-relationship">0%</div>
+            <div class="text-[11px] text-slate-400 mt-1">Relationship</div>
+          </div>
+          <!-- Strategic -->
+          <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700/60">
+            <div class="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">Стратегия</div>
+            <div class="text-2xl font-black text-white" id="score-strategic">0%</div>
+            <div class="text-[11px] text-slate-400 mt-1">Strategic</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP 5 SIGNATURE THEMES LIST -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span>🔥 Топ-5 Ваших Сильнейших Талантов</span>
+          </h3>
+          <span class="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full font-semibold border border-indigo-500/30">
+            Зона 90% вашей прибыли
+          </span>
+        </div>
+        <div class="space-y-3" id="top5-container">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- POSITIONS 6-10 (POWER 10) -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+        <h3 class="text-base font-bold text-white mb-3 flex items-center justify-between">
+          <span>Поддерживающий Top 6–10 (Вспомогательный резерв)</span>
+          <span class="text-xs text-slate-400">Часть Top-10</span>
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="top6-10-container">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- BLIND SPOTS (СЛЕПЫЕ ЗОНЫ) -->
+      <div class="bg-rose-950/20 border border-rose-500/30 rounded-2xl p-6 shadow-xl">
+        <div class="flex items-center gap-2 text-rose-400 font-bold text-base mb-2">
+          <span>⚠️ Ваши слепые зоны (Нижние таланты — Blind Spots)</span>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+          Никогда не пытайтесь «развить» эти качества сами. Попытка делать эту работу своими руками гарантированно сжигает до 70% вашей жизненной энергии и приводит к сливу денег.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4" id="blind-spots-container">
+          <!-- Injected via JS -->
+        </div>
+        <div class="p-3.5 rounded-xl bg-slate-900/90 border border-rose-500/20 text-xs text-slate-300" id="blind-spots-shield-advice">
+          <!-- Advice -->
+        </div>
+      </div>
+
+      <!-- TELEGRAM LEAD MAGNET CARD -->
+      <div class="bg-gradient-to-r from-indigo-900/90 via-purple-950 to-slate-900 border-2 border-indigo-500 rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold mb-3">
+          🔥 Экспресс-разбор готов
+        </div>
+
+        <h3 class="text-xl sm:text-2xl font-black text-white mb-2 leading-tight">
+          Заберите полный PDF-разбор и дорожную карту на 90 дней в Telegram
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
+          Тест определил ваш Top-5. Чтобы получить персональную расшифровку связок, аудит слепых зон и рекомендации по монетизации — введите контакт и перейдите в диалог:
+        </p>
+
+        <form id="tg-lead-form" onsubmit="handleLeadSubmit(event)" class="space-y-4 max-w-lg">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Ваше имя</label>
+              <input type="text" id="lead-name" required placeholder="Например: Алина" class="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-700 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Ваш Telegram</label>
+              <input type="text" id="lead-tg" required placeholder="@username или номер" class="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-700 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-indigo-500">
+            </div>
+          </div>
+
+          <button type="submit" id="tg-lead-btn" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-600 to-indigo-600 hover:from-indigo-600 hover:to-purple-700 text-white text-sm font-bold transition-all shadow-xl shadow-indigo-600/30 flex items-center justify-center gap-2 cursor-pointer">
+            <span>🚀 Получить персональный разбор в Telegram</span>
+          </button>
+          
+          <div class="text-[11px] text-slate-400 text-center flex items-center justify-center gap-2">
+            <span>🔒 Ваши данные конфиденциальны</span>
+            <span>•</span>
+            <span>⚡ Моментальный переход</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- X10 MONEY ROADMAP (КАК ИКСАНУТЬ В ДОХОДЕ) -->
+      <div class="bg-gradient-to-b from-indigo-950/40 to-slate-900 border border-indigo-500/40 rounded-2xl p-6 sm:p-8 shadow-2xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-3">
+          💰 План капитализации талантов
+        </div>
+        <h3 class="text-xl sm:text-2xl font-black text-white mb-4">
+          Пошаговый план: Как сделать x10 дохода с этим профилем
+        </h3>
+        
+        <div class="space-y-4 text-sm text-slate-200" id="x10-action-plan">
+          <!-- Injected via JS -->
+        </div>
+
+        <div class="mt-6 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          <button onclick="restartTest()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-all cursor-pointer">
+            🔄 Пройти заново
+          </button>
+          <button onclick="copyResultsToClipboard()" id="copy-btn" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all cursor-pointer shadow-lg shadow-indigo-600/30">
+            📋 Скопировать результат для AI-стратегии
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT ENGINE -->
+  <script>
+    // 34 GALLUP THEMES WITH METADATA & DOMAIN
+    const GALLUP_THEMES = {
+      // EXECUTING
+      Achiever: { nameRu: "Achiever (Достижение)", domain: "Executing", desc: "Неиссякаемый внутренний двигатель, кайф от ежедневного осязаемого результата." },
+      Arranger: { nameRu: "Arranger (Организатор)", domain: "Executing", desc: "Виртуозное жонглирование ресурсами и перестройка процессов на лету." },
+      Belief: { nameRu: "Belief (Убеждения)", domain: "Executing", desc: "Несгибаемые ценности, этический компас, верность миссии." },
+      Consistency: { nameRu: "Consistency (Справедливость)", domain: "Executing", desc: "Равные правила игры для всех, регламенты и стандартизация." },
+      Deliberative: { nameRu: "Deliberative (Осмотрительность)", domain: "Executing", desc: "Радар юридических и финансовых рисков, защита капитала." },
+      Discipline: { nameRu: "Discipline (Дисциплина)", domain: "Executing", desc: "Структура, порядок, таймлайны, непереносимость хаоса." },
+      Focus: { nameRu: "Focus (Фокус)", domain: "Executing", desc: "Удержание магистральной цели, отсекание второстепенного шума." },
+      Responsibility: { nameRu: "Responsibility (Ответственность)", domain: "Executing", desc: "Тотальное владение обещанием, безупречная репутация." },
+      Restorative: { nameRu: "Restorative (Исправление)", domain: "Executing", desc: "Траблшутер от бога: находит баги, поломки и моментально чинит их." },
+
+      // INFLUENCING
+      Activator: { nameRu: "Activator (Активатор)", domain: "Influencing", desc: "Хватит болтать — погнали делать! Моментальный запуск тестов и MVP." },
+      Command: { nameRu: "Command (Власть / Командование)", domain: "Influencing", desc: "Харизма лидера в кризис, жесткие переговоры, ясность позиции." },
+      Communication: { nameRu: "Communication (Красноречие)", domain: "Influencing", desc: "Мастер историй, ярких образов, продающего сторителлинга и питчей." },
+      Competition: { nameRu: "Competition (Конкуренция)", domain: "Influencing", desc: "Жажда быть номером один, обгон соперников, второе место неприемлемо." },
+      Maximizer: { nameRu: "Maximizer (Максимизатор)", domain: "Influencing", desc: "Превращение хорошего в выдающееся (10x), фокус только на сильном." },
+      SelfAssurance: { nameRu: "Self-Assurance (Уверенность)", domain: "Influencing", desc: "Глубокая внутренняя вера в правильность своих решений в шторм." },
+      Significance: { nameRu: "Significance (Значимость)", domain: "Influencing", desc: "Масштабные проекты мирового уровня, признание авторитетов." },
+      Woo: { nameRu: "Woo (Завоевание обаянием)", domain: "Influencing", desc: "Легкость холодного нетворкинга, открытие любых дверей и партнерств." },
+
+      // RELATIONSHIP BUILDING
+      Adaptability: { nameRu: "Adaptability (Адаптивность)", domain: "Relationship", desc: "Жизнь в моменте «здесь и сейчас», спокойствие при форс-мажорах." },
+      Connectedness: { nameRu: "Connectedness (Связанность)", domain: "Relationship", desc: "Вера в единство событий и людей, построение мощных комьюнити." },
+      Developer: { nameRu: "Developer (Развитие других)", domain: "Relationship", desc: "Видит скрытый потенциал в людях и обожает растить таланты." },
+      Empathy: { nameRu: "Empathy (Эмпатия)", domain: "Relationship", desc: "Считывание скрытых эмоций и болей за секунду. Золото для маркетинга." },
+      Harmony: { nameRu: "Harmony (Гармония)", domain: "Relationship", desc: "Поиск консенсуса, сглаживание конфликтов и разногласий." },
+      Includer: { nameRu: "Includer (Включение)", domain: "Relationship", desc: "Объединение людей, чтобы никто не чувствовал себя изгоем." },
+      Individualization: { nameRu: "Individualization (Индивидуальность)", domain: "Relationship", desc: "Видит уникальные триггеры каждого человека, кастинг супергероев." },
+      Positivity: { nameRu: "Positivity (Позитивность)", domain: "Relationship", desc: "Заразительный оптимизм и подъем боевого духа команды." },
+      Relator: { nameRu: "Relator (Свой круг)", domain: "Relationship", desc: "Глубокие, многолетние доверительные отношения с узким кругом партнеров." },
+
+      // STRATEGIC THINKING
+      Analytical: { nameRu: "Analytical (Аналитичность)", domain: "Strategic", desc: "Докажи цифрами! Поиск причинно-следственных связей и оцифровка." },
+      Context: { nameRu: "Context (Контекст)", domain: "Strategic", desc: "Понимание будущего через разбор истории, циклов и прецедентов." },
+      Futuristic: { nameRu: "Futuristic (Визионерство)", domain: "Strategic", desc: "Яркая детальная картина рынка на 3–10 лет вперед, вдохновляет людей." },
+      Ideation: { nameRu: "Ideation (Генерация идей)", domain: "Strategic", desc: "Фабрика концептов, неожиданные связки между разными нишами." },
+      Input: { nameRu: "Input (Накопление знаний)", domain: "Strategic", desc: "Коллекционер ценных знаний, инструментов, методологий и баз." },
+      Intellection: { nameRu: "Intellection (Мыслитель)", domain: "Strategic", desc: "Глубокая теоретическая работа, архитектура сложных систем." },
+      Learner: { nameRu: "Learner (Обучаемость)", domain: "Strategic", desc: "Кайф от быстрого освоения нового знания (AI, технологии) с нуля." },
+      Strategic: { nameRu: "Strategic (Стратег)", domain: "Strategic", desc: "Моментальный расчет лучшего маршрута обхода препятствий («Что если?»)." }
+    };
+
+    // ITEM BANK (CALIBRATED PAIRS)
+    const QUESTION_BANK = [
+      {
+            "themeA": "Achiever",
+            "textA": "Я чувствую себя продуктивным только тогда, когда каждый день закрываю конкретный осязаемый результат.",
+            "themeB": "Arranger",
+            "textB": "Я получаю кайф от перестройки хаотичных ресурсов и людей в идеальную работающую схему."
+      },
+      {
+            "themeA": "Belief",
+            "textA": "Для меня принципиально важно, чтобы проект строго совпадал с моими внутренними жизненными ценностями.",
+            "themeB": "Consistency",
+            "textB": "Правила, требования и регламенты должны быть абсолютно равными для всех без каких-либо исключений."
+      },
+      {
+            "themeA": "Deliberative",
+            "textA": "Перед любым решением я сначала выявляю все скрытые угрозы, юридические риски и подводные камни.",
+            "themeB": "Discipline",
+            "textB": "Мне жизненно необходим порядок, четкие списки, таймлайны и предсказуемый распорядок дня."
+      },
+      {
+            "themeA": "Focus",
+            "textA": "Я выбираю одну главную финансовую цель и безжалостно отсекаю любые отвлекающие задачи.",
+            "themeB": "Responsibility",
+            "textB": "Если я даю обещание, я расшибусь в лепешку, но выполню его с безупречным качеством."
+      },
+      {
+            "themeA": "Restorative",
+            "textA": "Я обожаю находить скрытые поломки, системные баги и реанимировать проблемные проекты.",
+            "themeB": "Activator",
+            "textB": "Хватит бесконечно планировать — нужно запускать MVP и проверять всё на живом опыте."
+      },
+      {
+            "themeA": "Command",
+            "textA": "В кризисной ситуации я без колебаний беру штурвал на себя и ставлю жесткие условия.",
+            "themeB": "Communication",
+            "textB": "Я умею упаковать любую сложную идею в яркую историю, метафору и продающий питч."
+      },
+      {
+            "themeA": "Competition",
+            "textA": "Меня зажигает победа над конкурентами — второе место для меня равносильно проигрышу.",
+            "themeB": "Maximizer",
+            "textB": "Я не трачу время на посредственность — беру работающее и вывожу его на уровень x10."
+      },
+      {
+            "themeA": "SelfAssurance",
+            "textA": "У меня несгибаемая внутренняя уверенность в своем курсе, даже если все вокруг сомневаются.",
+            "themeB": "Significance",
+            "textB": "Мне критически важно создавать заметные масштабные проекты, которые оставят след в индустрии."
+      },
+      {
+            "themeA": "Woo",
+            "textA": "Я обожаю знакомиться с незнакомцами и моментально располагаю к себе любого человека.",
+            "themeB": "Adaptability",
+            "textB": "Я легко и спокойно перестраиваюсь в моменте при любых форс-мажорах и смене планов."
+      },
+      {
+            "themeA": "Connectedness",
+            "textA": "Я верю, что случайных событий не бывает — всё в мире взаимосвязано глубинным смыслом.",
+            "themeB": "Developer",
+            "textB": "Я испытываю огромный восторг, когда помогаю другим людям раскрыть их скрытый потенциал."
+      },
+      {
+            "themeA": "Empathy",
+            "textA": "Я инстинктивно чувствую эмоции, внутреннее состояние и невысказанную боль других людей.",
+            "themeB": "Harmony",
+            "textB": "Я стремлюсь к общему согласию и инстинктивно избегаю бессмысленных конфликтов и споров."
+      },
+      {
+            "themeA": "Includer",
+            "textA": "Я слежу за тем, чтобы в коллективе ни один человек не чувствовал себя изолированным.",
+            "themeB": "Individualization",
+            "textB": "Я сразу вижу уникальный стиль и скрытые триггеры каждого конкретного человека."
+      },
+      {
+            "themeA": "Positivity",
+            "textA": "Я заряжаю команду энергией, юмором и непоколебимым оптимизмом даже в кризис.",
+            "themeB": "Relator",
+            "textB": "Я ценю только глубокие, проверенные годами доверительные отношения с узким кругом людей."
+      },
+      {
+            "themeA": "Analytical",
+            "textA": "Покажите мне твердые цифры, факты и метрики — я не верю предположениям на слово.",
+            "themeB": "Context",
+            "textB": "Чтобы принять верное решение сейчас, нужно досконально разобрать историю и прошлый опыт."
+      },
+      {
+            "themeA": "Futuristic",
+            "textA": "Я постоянно живу в будущем — отчетливо вижу, как изменится рынок через 3–5 лет.",
+            "themeB": "Ideation",
+            "textB": "Мой мозг генерирует десятки неожиданных концепций, связывая совершенно разные сферы."
+      },
+      {
+            "themeA": "Input",
+            "textA": "Я коллекционирую ценные знания, инструменты, статьи и базы: «вдруг это пригодится».",
+            "themeB": "Intellection",
+            "textB": "Мне необходимо регулярное уединение и время в тишине для глубокой мыслительной работы."
+      },
+      {
+            "themeA": "Learner",
+            "textA": "Мне доставляет максимальный кайф сам процесс освоения новых сложных навыков и AI с нуля.",
+            "themeB": "Strategic",
+            "textB": "Сквозь любой хаос я моментально рассчитываю самый короткий маршрут обхода препятствий."
+      },
+      {
+            "themeA": "Achiever",
+            "textA": "Мне необходимо постоянно вычеркивать завершенные пункты из списка дел, иначе день прошел зря.",
+            "themeB": "Belief",
+            "textB": "Деньги сами по себе меня не вдохновляют — мне нужна большая миссия и честный смысл деятельности."
+      },
+      {
+            "themeA": "Arranger",
+            "textA": "При изменении обстоятельств я мгновенно перетасовываю людей и задачи под максимальную эффективность.",
+            "themeB": "Consistency",
+            "textB": "Я не переношу фаворитизма и двойных стандартов в рабочих коллективах."
+      },
+      {
+            "themeA": "Deliberative",
+            "textA": "Я осторожен в выборе новых партнеров и не раскрываю карты, пока не убежусь в их надежности.",
+            "themeB": "Focus",
+            "textB": "Если новая идея не ведет напрямую к ключевой цели квартала, я решительно говорю ей «нет»."
+      },
+      {
+            "themeA": "Discipline",
+            "textA": "Беспорядок и срыв дедлайнов третьими лицами причиняют мне сильный внутренний дискомфорт.",
+            "themeB": "Responsibility",
+            "textB": "Я чувствую личную моральную ответственность за каждый сданный результат и договор."
+      },
+      {
+            "themeA": "Restorative",
+            "textA": "Сломанная воронка или неработающий процесс вызывают во мне спортивный азарт исследователя.",
+            "themeB": "Command",
+            "textB": "Я не боюсь открытой конфронтации и прямо говорю людям даже самую неприятную правду в лицо."
+      },
+      {
+            "themeA": "Activator",
+            "textA": "Только реальное действие дает истинную обратную связь — я предпочитаю стрелять, а потом целиться.",
+            "themeB": "Communication",
+            "textB": "Я получаю удовольствие от публичных выступлений, вебинаров и презентаций перед людьми."
+      },
+      {
+            "themeA": "Competition",
+            "textA": "Я постоянно сравниваю свои финансовые результаты и метрики с лидерами рынка.",
+            "themeB": "SelfAssurance",
+            "textB": "В глубине души я точно знаю, что способен справиться с любым штормом и вызовом судьбы."
+      },
+      {
+            "themeA": "Maximizer",
+            "textA": "Меня интересует превращение хорошего в выдающееся мирового уровня с максимальным чеком.",
+            "themeB": "Significance",
+            "textB": "Я хочу, чтобы мои достижения признавали самые авторитетные лидеры и эксперты рынка."
+      },
+      {
+            "themeA": "Woo",
+            "textA": "Для меня нет чужих людей — есть только друзья, с которыми я еще не успел перекинуться парой фраз.",
+            "themeB": "Connectedness",
+            "textB": "Каждая встреча и каждое препятствие несут в себе важный урок и высшую причину."
+      },
+      {
+            "themeA": "Adaptability",
+            "textA": "Я живу здесь и сейчас и воспринимаю неожиданные перемены как захватывающее приключение.",
+            "themeB": "Developer",
+            "textB": "Я замечаю малейшие ростки прогресса в учениках и сотрудниках задолго до других."
+      },
+      {
+            "themeA": "Empathy",
+            "textA": "Заходя в помещение, я мгновенно считываю эмоциональную температуру и настроение присутствующих.",
+            "themeB": "Includer",
+            "textB": "Мне невыносимо видеть, когда кого-то игнорируют или оставляют за кругом общения."
+      },
+      {
+            "themeA": "Harmony",
+            "textA": "В спорных ситуациях я всегда ищу точки соприкосновения и взаимовыгодные компромиссы.",
+            "themeB": "Individualization",
+            "textB": "Я подбираю индивидуальный ключик к каждому сотруднику вместо шаблонных уравниловок."
+      },
+      {
+            "themeA": "Positivity",
+            "textA": "Мой смех и жизнелюбие помогают разрядить самую тяжелую напряженную атмосферу.",
+            "themeB": "Analytical",
+            "textB": "Я раскладываю любую проблему на составляющие факторы и ищу скрытые причинно-следственные связи."
+      },
+      {
+            "themeA": "Relator",
+            "textA": "Поверхностный светский треп быстро утомляет меня — мне нужны душевные разговоры по существу.",
+            "themeB": "Context",
+            "textB": "Я изучаю архивные прецеденты и предпосылки событий, чтобы понять, почему мы оказались здесь."
+      },
+      {
+            "themeA": "Futuristic",
+            "textA": "Мои картины грядущего настолько яркие и осязаемые, что они вдохновляют инвесторов и команду.",
+            "themeB": "Input",
+            "textB": "Мои закладки и папки ломятся от полезных файлов, промптов, фреймворков и исследований."
+      },
+      {
+            "themeA": "Ideation",
+            "textA": "Я обожаю мозговые штурмы и нахожу парадоксальные решения там, где другие заходят в тупик.",
+            "themeB": "Intellection",
+            "textB": "Мой внутренний диалог никогда не прекращается — я постоянно анализирую смыслы и концепции."
+      },
+      {
+            "themeA": "Learner",
+            "textA": "Я не боюсь признать свое незнание и с детским восторгом погружаюсь в новую дисциплину.",
+            "themeB": "Achiever",
+            "textB": "Каждое утро мой счетчик достижений сбрасывается на ноль, и мне снова нужно доказывать себе состоятельность."
+      },
+      {
+            "themeA": "Strategic",
+            "textA": "На любую проблему у меня в голове сразу возникает 3–4 альтернативных сценария развития («Что если?»).",
+            "themeB": "Arranger",
+            "textB": "Мне нравится координировать многосоставные сложные проекты с десятками переменных."
+      },
+      {
+            "themeA": "Belief",
+            "textA": "Я никогда не пойду на компромисс со своей совестью ради сиюминутной выгоды или легкой прибыли.",
+            "themeB": "Deliberative",
+            "textB": "Лучше потратить время на аудит рисков, чем потом тушить пожары и терять вложенные деньги."
+      },
+      {
+            "themeA": "Consistency",
+            "textA": "Четкие стандарты и равные условия для всех участников гарантируют справедливость и стабильность.",
+            "themeB": "Discipline",
+            "textB": "Я разбиваю большие задачи на ежедневные структурированные шаги и методично следую им."
+      },
+      {
+            "themeA": "Focus",
+            "textA": "Я умею концентрироваться на одном приоритете часами, игнорируя фоновый шум и второстепенные дела.",
+            "themeB": "Restorative",
+            "textB": "Я чувствую прилив сил, когда спасаю зашедшую в тупик ситуацию и возвращаю ее к жизни."
+      },
+      {
+            "themeA": "Responsibility",
+            "textA": "Моя репутация надежного человека для меня дороже любых денег и оправданий.",
+            "themeB": "Activator",
+            "textB": "Меня утомляют долгие совещания без принятия немедленных решений прямо здесь и сейчас."
+      },
+      {
+            "themeA": "Command",
+            "textA": "Люди инстинктивно уступают мне лидерство, когда требуется твердая рука и ясность.",
+            "themeB": "Competition",
+            "textB": "Наличие сильного соперника заставляет меня выкладываться на 200% и совершать квантовые скачки."
+      },
+      {
+            "themeA": "Communication",
+            "textA": "Слова — мой главный рабочий инструмент: я завораживаю собеседников образной речью.",
+            "themeB": "Maximizer",
+            "textB": "Я предпочитаю работать только с талантами категории А и продуктами премиум-качества."
+      },
+      {
+            "themeA": "SelfAssurance",
+            "textA": "Чужая критика или авторитеты не способны свернуть меня с выбранного вектора.",
+            "themeB": "Woo",
+            "textB": "Я получаю колоссальный заряд энергии на нетворкингах, конференциях и светских встречах."
+      },
+      {
+            "themeA": "Significance",
+            "textA": "Мне тесно в рамках мелких местечковых задач — я стремлюсь к федеральному и мировому охвату.",
+            "themeB": "Adaptability",
+            "textB": "В условиях неопределенности я чувствую себя как рыба в воде, импровизируя на лету."
+      },
+      {
+            "themeA": "Connectedness",
+            "textA": "Я ощущаю незримую связь между всеми людьми, сообществами и глобальными процессами.",
+            "themeB": "Empathy",
+            "textB": "Люди охотно доверяют мне свои сокровенные переживания, потому что чувствуют искреннее понимание."
+      },
+      {
+            "themeA": "Developer",
+            "textA": "Моя миссия — взращивать таланты и радоваться их победам сильнее, чем своим собственным.",
+            "themeB": "Harmony",
+            "textB": "Агрессивные споры и перепалки на повышенных тонах эмоционально опустошают меня."
+      },
+      {
+            "themeA": "Includer",
+            "textA": "Я стремлюсь расширять круг доверия и интегрировать новых людей в команду.",
+            "themeB": "Positivity",
+            "textB": "Я искренне верю в лучший исход и помогаю другим поверить в свои силы."
+      },
+      {
+            "themeA": "Individualization",
+            "textA": "Мне нравится собирать проектные команды, как кастинг-директор подбирает актеров на роли.",
+            "themeB": "Relator",
+            "textB": "Ради настоящих друзей и давних партнеров я готов пойти в огонь и в воду."
+      },
+      {
+            "themeA": "Analytical",
+            "textA": "Мой разум скептичен: я подвергаю стресс-тесту любые гипотезы до подтверждения данными.",
+            "themeB": "Futuristic",
+            "textB": "Я предчувствую глобальные технологические сдвиги задолго до того, как они станут мейнстримом."
+      },
+      {
+            "themeA": "Context",
+            "textA": "Те, кто не помнят прошлых ошибок, обречены наступать на те же грабли снова и снова.",
+            "themeB": "Ideation",
+            "textB": "Новая дерзкая идея способна взбудоражить меня среди ночи и заставить сразу набросать схему."
+      },
+      {
+            "themeA": "Input",
+            "textA": "Я испытываю неутолимый аппетит к сбору фактов и информации из самых разных источников.",
+            "themeB": "Learner",
+            "textB": "Остановка в развитии для меня подобна смерти — я всегда должен изучать что-то свежее."
+      },
+      {
+            "themeA": "Intellection",
+            "textA": "Я получаю наслаждение от решения сложных абстрактных интеллектуальных задач.",
+            "themeB": "Strategic",
+            "textB": "Я интуитивно отбрасываю тупиковые ветки и выбираю путь с наименьшим сопротивлением и максимальным ROI."
+      },
+      {
+            "themeA": "Achiever",
+            "textA": "Я работаю без устали до тех пор, пока поставленная задача не будет полностью доведена до финала.",
+            "themeB": "Consistency",
+            "textB": "Каждый человек должен оцениваться по единой прозрачной шкале без скидок на статус."
+      },
+      {
+            "themeA": "Arranger",
+            "textA": "Я умею извлечь максимум результата из ограниченных людей и ресурсов за счет правильной расстановки.",
+            "themeB": "Belief",
+            "textB": "Мои базовые моральные принципы остаются неизменными при любой конъюнктуре рынка."
+      },
+      {
+            "themeA": "Deliberative",
+            "textA": "Я редко действую импульсивно — каждый шаг должен быть взвешен и перепроверен.",
+            "themeB": "Responsibility",
+            "textB": "Мне физически тяжело подвести доверившихся мне людей или не уложиться в согласованный срок."
+      },
+      {
+            "themeA": "Discipline",
+            "textA": "Моя продуктивность максимальна, когда в процессах есть четкий ритм, структура и графики.",
+            "themeB": "Focus",
+            "textB": "Каждое утро я спрашиваю себя: приближает ли это действие меня к генеральной цели?"
+      },
+      {
+            "themeA": "Restorative",
+            "textA": "Мой взгляд моментально выхватывает изъяны и слабые звенья в любой бизнес-модели.",
+            "themeB": "Communication",
+            "textB": "Я легко объясняю сложные технологические вещи простым языком домохозяйки."
+      },
+      {
+            "themeA": "Activator",
+            "textA": "Я обладаю даром мгновенно сдвигать застрявшие проекты с мертвой точки в действие.",
+            "themeB": "Command",
+            "textB": "Я презираю уклончивость и полумеры — позиция лидера должна быть кристально четкой."
+      },
+      {
+            "themeA": "Competition",
+            "textA": "Мне важно быть признанным лучшим в своей нише и собирать главные лавры первенства.",
+            "themeB": "Significance",
+            "textB": "Мое имя должно ассоциироваться с исключительным успехом и выдающимися кейсами."
+      },
+      {
+            "themeA": "Maximizer",
+            "textA": "Бессмысленно подтягивать слабые стороны — нужно гипер-инвестировать в природную гениальность.",
+            "themeB": "SelfAssurance",
+            "textB": "Я смело беру на себя риски принятия стратегических решений в условиях тумана войны."
+      },
+      {
+            "themeA": "Woo",
+            "textA": "Мне ничего не стоит растопить лед в общении с самым закрытым человеком за две минуты.",
+            "themeB": "Developer",
+            "textB": "Я готов вкладывать часы в наставничество, видя, как человек преображается на глазах."
+      },
+      {
+            "themeA": "Adaptability",
+            "textA": "Строгие пятилетние планы кажутся мне оторванными от жизни — важно чутко реагировать на пульс дня.",
+            "themeB": "Connectedness",
+            "textB": "Моя вера в высшую гармонию помогает мне сохранять спокойствие в моменты хаоса."
+      },
+      {
+            "themeA": "Empathy",
+            "textA": "Я могу поставить себя на место любого клиента и прочувствовать его мотивы изнутри.",
+            "themeB": "Individualization",
+            "textB": "Я не верю в обобщения о людях — каждый человек уникален как отпечаток пальца."
+      },
+      {
+            "themeA": "Harmony",
+            "textA": "Я умею примирять враждующие стороны и наводить мосты согласия в коллективе.",
+            "themeB": "Includer",
+            "textB": "Каждый человек заслуживает шанса быть услышанным и принятым в сообщество."
+      },
+      {
+            "themeA": "Positivity",
+            "textA": "Мне нравится делать рабочий процесс веселым, вдохновляющим и легким праздником.",
+            "themeB": "Context",
+            "textB": "Мне важно знать происхождение людей, компаний и проектов для построения верных прогнозов."
+      },
+      {
+            "themeA": "Relator",
+            "textA": "Я раскрываюсь по-настоящему только перед теми, кто доказал свою преданность временем.",
+            "themeB": "Analytical",
+            "textB": "Решения, основанные на эмоциях, в бизнесе чаще всего приводят к финансовым провалам."
+      },
+      {
+            "themeA": "Futuristic",
+            "textA": "Текущая рутина кажется мне пресной по сравнению с масштабом того, что мы создадим завтра.",
+            "themeB": "Intellection",
+            "textB": "Прежде чем озвучить позицию, мне нужно время «поварить» мысль внутри себя."
+      },
+      {
+            "themeA": "Ideation",
+            "textA": "Мне скучно идти проторенной тропой — я ищу оригинальные углы атаки рынка.",
+            "themeB": "Input",
+            "textB": "В сложной ситуации я достаю из своих архивов именно тот инструмент, который решает задачу."
+      },
+      {
+            "themeA": "Learner",
+            "textA": "Результат важен, но еще важнее драйв от того, как нейроны мозга складываются в новую структуру.",
+            "themeB": "Arranger",
+            "textB": "В хаотичной ситуации я инстинктивно вижу, как пересобрать части пазла в гармоничный механизм."
+      },
+      {
+            "themeA": "Strategic",
+            "textA": "Я вижу паттерны и закономерности там, где остальные видят лишь случайную неразбериху.",
+            "themeB": "Achiever",
+            "textB": "Меня раздражает праздный отдых, если в проекте еще осталась несделанная работа."
+      },
+      {
+            "themeA": "Belief",
+            "textA": "Я готов работать сверхурочно ради дела, в священную пользу которого я искренне верю.",
+            "themeB": "Discipline",
+            "textB": "Я заранее планирую каждый день и чувствую уверенность, когда всё идет по намеченному плану."
+      },
+      {
+            "themeA": "Consistency",
+            "textA": "Стабильность бизнес-системы держится на неукоснительном соблюдении общих регламентов.",
+            "themeB": "Deliberative",
+            "textB": "Моя сила в том, что я замечаю опасности задолго до того, как они станут очевидны остальным."
+      },
+      {
+            "themeA": "Focus",
+            "textA": "Многозадачность распыляет силы — я бью в одну точку до пробития результата.",
+            "themeB": "Activator",
+            "textB": "Лучше сделать несовершенно сегодня, чем идеально никогда."
+      },
+      {
+            "themeA": "Responsibility",
+            "textA": "Я беру на себя полное психологическое владение задачей от начала и до победного конца.",
+            "themeB": "Restorative",
+            "textB": "Мне интереснее починить сложный дефект, чем строить что-то банальное с чистого листа."
+      },
+      {
+            "themeA": "Command",
+            "textA": "В сложных переговорах я умею продавливать свои условия и защищать интересы проекта.",
+            "themeB": "Maximizer",
+            "textB": "Мой стандарты качества заставляют других тянуться вверх или уходить с дистанции."
+      },
+      {
+            "themeA": "Communication",
+            "textA": "Мне важно делиться своими мыслями, писать посты и формулировать смыслы для аудитории.",
+            "themeB": "Competition",
+            "textB": "Дух состязания заряжает меня больше, чем любые абстрактные медитации."
+      },
+      {
+            "themeA": "SelfAssurance",
+            "textA": "Мой внутренний компас безошибочно подсказывает мне верное направление.",
+            "themeB": "Adaptability",
+            "textB": "Я не испытываю стресса, если за пять минут до вылета всё расписание переворачивается."
+      },
+      {
+            "themeA": "Significance",
+            "textA": "Я чувствую драйв, когда на меня направлены софиты и ожидания большой аудитории.",
+            "themeB": "Woo",
+            "textB": "Широкая сеть социальных связей — мой естественный образ жизни и главный капитал."
+      },
+      {
+            "themeA": "Connectedness",
+            "textA": "Я объединяю людей вокруг больших ценностей, показывая им картину единства.",
+            "themeB": "Harmony",
+            "textB": "Практическая польза и мирное сотрудничество всегда важнее доказательства своей правоты."
+      },
+      {
+            "themeA": "Developer",
+            "textA": "В каждом человеке скрыт алмаз, который просто нуждается в правильной огранке.",
+            "themeB": "Empathy",
+            "textB": "Мое сердце открыто к переживаниям других, даже когда они стараются их скрыть."
+      },
+      {
+            "themeA": "Includer",
+            "textA": "Вместе мы сильнее — я строю инклюзивную атмосферу, где рады каждому участнику.",
+            "themeB": "Relator",
+            "textB": "Крепкие проверенные связи для меня в сто раз ценнее сотни визиток из чатов."
+      },
+      {
+            "themeA": "Individualization",
+            "textA": "Я интуитивно знаю, какой подарок или какие слова мотивации попадут человеку прямо в душу.",
+            "themeB": "Positivity",
+            "textB": "Я притягиваю людей позитивным настроем и искренними комплиментами."
+      },
+      {
+            "themeA": "Analytical",
+            "textA": "Я чувствую ясность, когда перед глазами есть прозрачные графики, когорты и юнит-экономика.",
+            "themeB": "Ideation",
+            "textB": "Обычные вещи кажутся мне захватывающими, когда я нахожу в них скрытый концептуальный слой."
+      },
+      {
+            "themeA": "Context",
+            "textA": "Погружение в исторический контекст дает мне надежный фундамент под ногами.",
+            "themeB": "Futuristic",
+            "textB": "Я заряжаюсь энергией, когда проектирую инновационные продукты следующего поколения."
+      },
+      {
+            "themeA": "Input",
+            "textA": "Знания — это стратегический запас, который рано или поздно выстрелит в бизнесе.",
+            "themeB": "Strategic",
+            "textB": "Мой ум постоянно играет в шахматы с реальностью на несколько ходов вперед."
+      },
+      {
+            "themeA": "Intellection",
+            "textA": "Глубокие размышления заряжают мои интеллектуальные батареи лучше любого шума.",
+            "themeB": "Learner",
+            "textB": "Я моментально осваиваю передовые нейросети и инструменты, опережая неповоротливых коллег."
+      },
+      {
+            "themeA": "Achiever",
+            "textA": "Я чувствую себя продуктивным только тогда, когда каждый день закрываю конкретный осязаемый результат.",
+            "themeB": "Deliberative",
+            "textB": "Перед любым решением я сначала выявляю все скрытые угрозы, юридические риски и подводные камни."
+      },
+      {
+            "themeA": "Arranger",
+            "textA": "Я получаю кайф от перестройки хаотичных ресурсов и людей в идеальную работающую схему.",
+            "themeB": "Discipline",
+            "textB": "Мне жизненно необходим порядок, четкие списки, таймлайны и предсказуемый распорядок дня."
+      },
+      {
+            "themeA": "Belief",
+            "textA": "Для меня принципиально важно, чтобы проект строго совпадал с моими внутренними жизненными ценностями.",
+            "themeB": "Focus",
+            "textB": "Я выбираю одну главную финансовую цель и безжалостно отсекаю любые отвлекающие задачи."
+      },
+      {
+            "themeA": "Consistency",
+            "textA": "Правила, требования и регламенты должны быть абсолютно равными для всех без каких-либо исключений.",
+            "themeB": "Responsibility",
+            "textB": "Если я даю обещание, я расшибусь в лепешку, но выполню его с безупречным качеством."
+      },
+      {
+            "themeA": "Restorative",
+            "textA": "Я обожаю находить скрытые поломки, системные баги и реанимировать проблемные проекты.",
+            "themeB": "Competition",
+            "textB": "Меня зажигает победа над конкурентами — второе место для меня равносильно проигрышу."
+      },
+      {
+            "themeA": "Activator",
+            "textA": "Хватит бесконечно планировать — нужно запускать MVP и проверять всё на живом опыте.",
+            "themeB": "Maximizer",
+            "textB": "Я не трачу время на посредственность — беру работающее и вывожу его на уровень x10."
+      },
+      {
+            "themeA": "Command",
+            "textA": "В кризисной ситуации я без колебаний беру штурвал на себя и ставлю жесткие условия.",
+            "themeB": "SelfAssurance",
+            "textB": "У меня несгибаемая внутренняя уверенность в своем курсе, даже если все вокруг сомневаются."
+      },
+      {
+            "themeA": "Communication",
+            "textA": "Я умею упаковать любую сложную идею в яркую историю, метафору и продающий питч.",
+            "themeB": "Significance",
+            "textB": "Мне критически важно создавать заметные масштабные проекты, которые оставят след в индустрии."
+      },
+      {
+            "themeA": "Woo",
+            "textA": "Я обожаю знакомиться с незнакомцами и моментально располагаю к себе любого человека.",
+            "themeB": "Empathy",
+            "textB": "Я инстинктивно чувствую эмоции, внутреннее состояние и невысказанную боль других людей."
+      },
+      {
+            "themeA": "Adaptability",
+            "textA": "Я легко и спокойно перестраиваюсь в моменте при любых форс-мажорах и смене планов.",
+            "themeB": "Harmony",
+            "textB": "Я стремлюсь к общему согласию и инстинктивно избегаю бессмысленных конфликтов и споров."
+      },
+      {
+            "themeA": "Connectedness",
+            "textA": "Я верю, что случайных событий не бывает — всё в мире взаимосвязано глубинным смыслом.",
+            "themeB": "Includer",
+            "textB": "Я слежу за тем, чтобы в коллективе ни один человек не чувствовал себя изолированным."
+      },
+      {
+            "themeA": "Developer",
+            "textA": "Я испытываю огромный восторг, когда помогаю другим людям раскрыть их скрытый потенциал.",
+            "themeB": "Individualization",
+            "textB": "Я сразу вижу уникальный стиль и скрытые триггеры каждого конкретного человека."
+      },
+      {
+            "themeA": "Positivity",
+            "textA": "Я заряжаю команду энергией, юмором и непоколебимым оптимизмом даже в кризис.",
+            "themeB": "Futuristic",
+            "textB": "Я постоянно живу в будущем — отчетливо вижу, как изменится рынок через 3–5 лет."
+      },
+      {
+            "themeA": "Relator",
+            "textA": "Я ценю только глубокие, проверенные годами доверительные отношения с узким кругом людей.",
+            "themeB": "Ideation",
+            "textB": "Мой мозг генерирует десятки неожиданных концепций, связывая совершенно разные сферы."
+      },
+      {
+            "themeA": "Analytical",
+            "textA": "Покажите мне твердые цифры, факты и метрики — я не верю предположениям на слово.",
+            "themeB": "Input",
+            "textB": "Я коллекционирую ценные знания, инструменты, статьи и базы: «вдруг это пригодится»."
+      },
+      {
+            "themeA": "Context",
+            "textA": "Чтобы принять верное решение сейчас, нужно досконально разобрать историю и прошлый опыт.",
+            "themeB": "Intellection",
+            "textB": "Мне необходимо регулярное уединение и время в тишине для глубокой мыслительной работы."
+      },
+      {
+            "themeA": "Learner",
+            "textA": "Мне доставляет максимальный кайф сам процесс освоения новых сложных навыков и AI с нуля.",
+            "themeB": "Belief",
+            "textB": "Деньги сами по себе меня не вдохновляют — мне нужна большая миссия и честный смысл деятельности."
+      },
+      {
+            "themeA": "Strategic",
+            "textA": "Сквозь любой хаос я моментально рассчитываю самый короткий маршрут обхода препятствий.",
+            "themeB": "Consistency",
+            "textB": "Я не переношу фаворитизма и двойных стандартов в рабочих коллективах."
+      },
+      {
+            "themeA": "Achiever",
+            "textA": "Мне необходимо постоянно вычеркивать завершенные пункты из списка дел, иначе день прошел зря.",
+            "themeB": "Discipline",
+            "textB": "Беспорядок и срыв дедлайнов третьими лицами причиняют мне сильный внутренний дискомфорт."
+      },
+      {
+            "themeA": "Arranger",
+            "textA": "При изменении обстоятельств я мгновенно перетасовываю людей и задачи под максимальную эффективность.",
+            "themeB": "Deliberative",
+            "textB": "Я осторожен в выборе новых партнеров и не раскрываю карты, пока не убежусь в их надежности."
+      },
+      {
+            "themeA": "Focus",
+            "textA": "Если новая идея не ведет напрямую к ключевой цели квартала, я решительно говорю ей «нет».",
+            "themeB": "Command",
+            "textB": "Я не боюсь открытой конфронтации и прямо говорю людям даже самую неприятную правду в лицо."
+      },
+      {
+            "themeA": "Responsibility",
+            "textA": "Я чувствую личную моральную ответственность за каждый сданный результат и договор.",
+            "themeB": "Communication",
+            "textB": "Я получаю удовольствие от публичных выступлений, вебинаров и презентаций перед людьми."
+      },
+      {
+            "themeA": "Restorative",
+            "textA": "Сломанная воронка или неработающий процесс вызывают во мне спортивный азарт исследователя.",
+            "themeB": "Maximizer",
+            "textB": "Меня интересует превращение хорошего в выдающееся мирового уровня с максимальным чеком."
+      },
+      {
+            "themeA": "Activator",
+            "textA": "Только реальное действие дает истинную обратную связь — я предпочитаю стрелять, а потом целиться.",
+            "themeB": "Competition",
+            "textB": "Я постоянно сравниваю свои финансовые результаты и метрики с лидерами рынка."
+      },
+      {
+            "themeA": "SelfAssurance",
+            "textA": "В глубине души я точно знаю, что способен справиться с любым штормом и вызовом судьбы.",
+            "themeB": "Connectedness",
+            "textB": "Каждая встреча и каждое препятствие несут в себе важный урок и высшую причину."
+      },
+      {
+            "themeA": "Significance",
+            "textA": "Я хочу, чтобы мои достижения признавали самые авторитетные лидеры и эксперты рынка.",
+            "themeB": "Developer",
+            "textB": "Я замечаю малейшие ростки прогресса в учениках и сотрудниках задолго до других."
+      },
+      {
+            "themeA": "Woo",
+            "textA": "Для меня нет чужих людей — есть только друзья, с которыми я еще не успел перекинуться парой фраз.",
+            "themeB": "Harmony",
+            "textB": "В спорных ситуациях я всегда ищу точки соприкосновения и взаимовыгодные компромиссы."
+      },
+      {
+            "themeA": "Adaptability",
+            "textA": "Я живу здесь и сейчас и воспринимаю неожиданные перемены как захватывающее приключение.",
+            "themeB": "Empathy",
+            "textB": "Заходя в помещение, я мгновенно считываю эмоциональную температуру и настроение присутствующих."
+      },
+      {
+            "themeA": "Includer",
+            "textA": "Мне невыносимо видеть, когда кого-то игнорируют или оставляют за кругом общения.",
+            "themeB": "Analytical",
+            "textB": "Я раскладываю любую проблему на составляющие факторы и ищу скрытые причинно-следственные связи."
+      },
+      {
+            "themeA": "Individualization",
+            "textA": "Я подбираю индивидуальный ключик к каждому сотруднику вместо шаблонных уравниловок.",
+            "themeB": "Context",
+            "textB": "Я изучаю архивные прецеденты и предпосылки событий, чтобы понять, почему мы оказались здесь."
+      },
+      {
+            "themeA": "Positivity",
+            "textA": "Мой смех и жизнелюбие помогают разрядить самую тяжелую напряженную атмосферу.",
+            "themeB": "Ideation",
+            "textB": "Я обожаю мозговые штурмы и нахожу парадоксальные решения там, где другие заходят в тупик."
+      },
+      {
+            "themeA": "Relator",
+            "textA": "Поверхностный светский треп быстро утомляет меня — мне нужны душевные разговоры по существу.",
+            "themeB": "Futuristic",
+            "textB": "Мои картины грядущего настолько яркие и осязаемые, что они вдохновляют инвесторов и команду."
+      },
+      {
+            "themeA": "Input",
+            "textA": "Мои закладки и папки ломятся от полезных файлов, промптов, фреймворков и исследований.",
+            "themeB": "Achiever",
+            "textB": "Каждое утро мой счетчик достижений сбрасывается на ноль, и мне снова нужно доказывать себе состоятельность."
+      },
+      {
+            "themeA": "Intellection",
+            "textA": "Мой внутренний диалог никогда не прекращается — я постоянно анализирую смыслы и концепции.",
+            "themeB": "Arranger",
+            "textB": "Мне нравится координировать многосоставные сложные проекты с десятками переменных."
+      },
+      {
+            "themeA": "Learner",
+            "textA": "Я не боюсь признать свое незнание и с детским восторгом погружаюсь в новую дисциплину.",
+            "themeB": "Consistency",
+            "textB": "Четкие стандарты и равные условия для всех участников гарантируют справедливость и стабильность."
+      },
+      {
+            "themeA": "Strategic",
+            "textA": "На любую проблему у меня в голове сразу возникает 3–4 альтернативных сценария развития («Что если?»).",
+            "themeB": "Belief",
+            "textB": "Я никогда не пойду на компромисс со своей совестью ради сиюминутной выгоды или легкой прибыли."
+      },
+      {
+            "themeA": "Deliberative",
+            "textA": "Лучше потратить время на аудит рисков, чем потом тушить пожары и терять вложенные деньги.",
+            "themeB": "Restorative",
+            "textB": "Я чувствую прилив сил, когда спасаю зашедшую в тупик ситуацию и возвращаю ее к жизни."
+      },
+      {
+            "themeA": "Discipline",
+            "textA": "Я разбиваю большие задачи на ежедневные структурированные шаги и методично следую им.",
+            "themeB": "Activator",
+            "textB": "Меня утомляют долгие совещания без принятия немедленных решений прямо здесь и сейчас."
+      },
+      {
+            "themeA": "Focus",
+            "textA": "Я умею концентрироваться на одном приоритете часами, игнорируя фоновый шум и второстепенные дела.",
+            "themeB": "Communication",
+            "textB": "Слова — мой главный рабочий инструмент: я завораживаю собеседников образной речью."
+      },
+      {
+            "themeA": "Responsibility",
+            "textA": "Моя репутация надежного человека для меня дороже любых денег и оправданий.",
+            "themeB": "Command",
+            "textB": "Люди инстинктивно уступают мне лидерство, когда требуется твердая рука и ясность."
+      },
+      {
+            "themeA": "Competition",
+            "textA": "Наличие сильного соперника заставляет меня выкладываться на 200% и совершать квантовые скачки.",
+            "themeB": "Woo",
+            "textB": "Я получаю колоссальный заряд энергии на нетворкингах, конференциях и светских встречах."
+      },
+      {
+            "themeA": "Maximizer",
+            "textA": "Я предпочитаю работать только с талантами категории А и продуктами премиум-качества.",
+            "themeB": "Adaptability",
+            "textB": "В условиях неопределенности я чувствую себя как рыба в воде, импровизируя на лету."
+      },
+      {
+            "themeA": "SelfAssurance",
+            "textA": "Чужая критика или авторитеты не способны свернуть меня с выбранного вектора.",
+            "themeB": "Developer",
+            "textB": "Моя миссия — взращивать таланты и радоваться их победам сильнее, чем своим собственным."
+      },
+      {
+            "themeA": "Significance",
+            "textA": "Мне тесно в рамках мелких местечковых задач — я стремлюсь к федеральному и мировому охвату.",
+            "themeB": "Connectedness",
+            "textB": "Я ощущаю незримую связь между всеми людьми, сообществами и глобальными процессами."
+      },
+      {
+            "themeA": "Empathy",
+            "textA": "Люди охотно доверяют мне свои сокровенные переживания, потому что чувствуют искреннее понимание.",
+            "themeB": "Positivity",
+            "textB": "Я искренне верю в лучший исход и помогаю другим поверить в свои силы."
+      },
+      {
+            "themeA": "Harmony",
+            "textA": "Агрессивные споры и перепалки на повышенных тонах эмоционально опустошают меня.",
+            "themeB": "Relator",
+            "textB": "Ради настоящих друзей и давних партнеров я готов пойти в огонь и в воду."
+      },
+      {
+            "themeA": "Includer",
+            "textA": "Я стремлюсь расширять круг доверия и интегрировать новых людей в команду.",
+            "themeB": "Context",
+            "textB": "Те, кто не помнят прошлых ошибок, обречены наступать на те же грабли снова и снова."
+      },
+      {
+            "themeA": "Individualization",
+            "textA": "Мне нравится собирать проектные команды, как кастинг-директор подбирает актеров на роли.",
+            "themeB": "Analytical",
+            "textB": "Мой разум скептичен: я подвергаю стресс-тесту любые гипотезы до подтверждения данными."
+      },
+      {
+            "themeA": "Futuristic",
+            "textA": "Я предчувствую глобальные технологические сдвиги задолго до того, как они станут мейнстримом.",
+            "themeB": "Learner",
+            "textB": "Остановка в развитии для меня подобна смерти — я всегда должен изучать что-то свежее."
+      },
+      {
+            "themeA": "Ideation",
+            "textA": "Новая дерзкая идея способна взбудоражить меня среди ночи и заставить сразу набросать схему.",
+            "themeB": "Strategic",
+            "textB": "Я интуитивно отбрасываю тупиковые ветки и выбираю путь с наименьшим сопротивлением и максимальным ROI."
+      },
+      {
+            "themeA": "Input",
+            "textA": "Я испытываю неутолимый аппетит к сбору фактов и информации из самых разных источников.",
+            "themeB": "Arranger",
+            "textB": "Я умею извлечь максимум результата из ограниченных людей и ресурсов за счет правильной расстановки."
+      },
+      {
+            "themeA": "Intellection",
+            "textA": "Я получаю наслаждение от решения сложных абстрактных интеллектуальных задач.",
+            "themeB": "Achiever",
+            "textB": "Я работаю без устали до тех пор, пока поставленная задача не будет полностью доведена до финала."
+      },
+      {
+            "themeA": "Belief",
+            "textA": "Мои базовые моральные принципы остаются неизменными при любой конъюнктуре рынка.",
+            "themeB": "Responsibility",
+            "textB": "Мне физически тяжело подвести доверившихся мне людей или не уложиться в согласованный срок."
+      },
+      {
+            "themeA": "Consistency",
+            "textA": "Каждый человек должен оцениваться по единой прозрачной шкале без скидок на статус.",
+            "themeB": "Focus",
+            "textB": "Каждое утро я спрашиваю себя: приближает ли это действие меня к генеральной цели?"
+      },
+      {
+            "themeA": "Deliberative",
+            "textA": "Я редко действую импульсивно — каждый шаг должен быть взвешен и перепроверен.",
+            "themeB": "Activator",
+            "textB": "Я обладаю даром мгновенно сдвигать застрявшие проекты с мертвой точки в действие."
+      },
+      {
+            "themeA": "Discipline",
+            "textA": "Моя продуктивность максимальна, когда в процессах есть четкий ритм, структура и графики.",
+            "themeB": "Restorative",
+            "textB": "Мой взгляд моментально выхватывает изъяны и слабые звенья в любой бизнес-модели."
+      },
+      {
+            "themeA": "Command",
+            "textA": "Я презираю уклончивость и полумеры — позиция лидера должна быть кристально четкой.",
+            "themeB": "Significance",
+            "textB": "Мое имя должно ассоциироваться с исключительным успехом и выдающимися кейсами."
+      },
+      {
+            "themeA": "Communication",
+            "textA": "Я легко объясняю сложные технологические вещи простым языком домохозяйки.",
+            "themeB": "SelfAssurance",
+            "textB": "Я смело беру на себя риски принятия стратегических решений в условиях тумана войны."
+      },
+      {
+            "themeA": "Competition",
+            "textA": "Мне важно быть признанным лучшим в своей нише и собирать главные лавры первенства.",
+            "themeB": "Adaptability",
+            "textB": "Строгие пятилетние планы кажутся мне оторванными от жизни — важно чутко реагировать на пульс дня."
+      },
+      {
+            "themeA": "Maximizer",
+            "textA": "Бессмысленно подтягивать слабые стороны — нужно гипер-инвестировать в природную гениальность.",
+            "themeB": "Woo",
+            "textB": "Мне ничего не стоит растопить лед в общении с самым закрытым человеком за две минуты."
+      },
+      {
+            "themeA": "Connectedness",
+            "textA": "Моя вера в высшую гармонию помогает мне сохранять спокойствие в моменты хаоса.",
+            "themeB": "Individualization",
+            "textB": "Я не верю в обобщения о людях — каждый человек уникален как отпечаток пальца."
+      },
+      {
+            "themeA": "Developer",
+            "textA": "Я готов вкладывать часы в наставничество, видя, как человек преображается на глазах.",
+            "themeB": "Includer",
+            "textB": "Каждый человек заслуживает шанса быть услышанным и принятым в сообщество."
+      },
+      {
+            "themeA": "Empathy",
+            "textA": "Я могу поставить себя на место любого клиента и прочувствовать его мотивы изнутри.",
+            "themeB": "Relator",
+            "textB": "Я раскрываюсь по-настоящему только перед теми, кто доказал свою преданность временем."
+      },
+      {
+            "themeA": "Harmony",
+            "textA": "Я умею примирять враждующие стороны и наводить мосты согласия в коллективе.",
+            "themeB": "Positivity",
+            "textB": "Мне нравится делать рабочий процесс веселым, вдохновляющим и легким праздником."
+      },
+      {
+            "themeA": "Analytical",
+            "textA": "Решения, основанные на эмоциях, в бизнесе чаще всего приводят к финансовым провалам.",
+            "themeB": "Intellection",
+            "textB": "Прежде чем озвучить позицию, мне нужно время «поварить» мысль внутри себя."
+      },
+      {
+            "themeA": "Context",
+            "textA": "Мне важно знать происхождение людей, компаний и проектов для построения верных прогнозов.",
+            "themeB": "Input",
+            "textB": "В сложной ситуации я достаю из своих архивов именно тот инструмент, который решает задачу."
+      },
+      {
+            "themeA": "Futuristic",
+            "textA": "Текущая рутина кажется мне пресной по сравнению с масштабом того, что мы создадим завтра.",
+            "themeB": "Strategic",
+            "textB": "Я вижу паттерны и закономерности там, где остальные видят лишь случайную неразбериху."
+      },
+      {
+            "themeA": "Ideation",
+            "textA": "Мне скучно идти проторенной тропой — я ищу оригинальные углы атаки рынка.",
+            "themeB": "Learner",
+            "textB": "Результат важен, но еще важнее драйв от того, как нейроны мозга складываются в новую структуру."
+      },
+      {
+            "themeA": "Achiever",
+            "textA": "Меня раздражает праздный отдых, если в проекте еще осталась несделанная работа.",
+            "themeB": "Focus",
+            "textB": "Многозадачность распыляет силы — я бью в одну точку до пробития результата."
+      },
+      {
+            "themeA": "Arranger",
+            "textA": "В хаотичной ситуации я инстинктивно вижу, как пересобрать части пазла в гармоничный механизм.",
+            "themeB": "Responsibility",
+            "textB": "Я беру на себя полное психологическое владение задачей от начала и до победного конца."
+      },
+      {
+            "themeA": "Belief",
+            "textA": "Я готов работать сверхурочно ради дела, в священную пользу которого я искренне верю.",
+            "themeB": "Restorative",
+            "textB": "Мне интереснее починить сложный дефект, чем строить что-то банальное с чистого листа."
+      },
+      {
+            "themeA": "Consistency",
+            "textA": "Стабильность бизнес-системы держится на неукоснительном соблюдении общих регламентов.",
+            "themeB": "Activator",
+            "textB": "Лучше сделать несовершенно сегодня, чем идеально никогда."
+      },
+      {
+            "themeA": "Deliberative",
+            "textA": "Моя сила в том, что я замечаю опасности задолго до того, как они станут очевидны остальным.",
+            "themeB": "Command",
+            "textB": "В сложных переговорах я умею продавливать свои условия и защищать интересы проекта."
+      },
+      {
+            "themeA": "Discipline",
+            "textA": "Я заранее планирую каждый день и чувствую уверенность, когда всё идет по намеченному плану.",
+            "themeB": "Communication",
+            "textB": "Мне важно делиться своими мыслями, писать посты и формулировать смыслы для аудитории."
+      },
+      {
+            "themeA": "Competition",
+            "textA": "Дух состязания заряжает меня больше, чем любые абстрактные медитации.",
+            "themeB": "Connectedness",
+            "textB": "Я объединяю людей вокруг больших ценностей, показывая им картину единства."
+      },
+      {
+            "themeA": "Maximizer",
+            "textA": "Мой стандарты качества заставляют других тянуться вверх или уходить с дистанции.",
+            "themeB": "Developer",
+            "textB": "В каждом человеке скрыт алмаз, который просто нуждается в правильной огранке."
+      },
+      {
+            "themeA": "SelfAssurance",
+            "textA": "Мой внутренний компас безошибочно подсказывает мне верное направление.",
+            "themeB": "Empathy",
+            "textB": "Мое сердце открыто к переживаниям других, даже когда они стараются их скрыть."
+      },
+      {
+            "themeA": "Significance",
+            "textA": "Я чувствую драйв, когда на меня направлены софиты и ожидания большой аудитории.",
+            "themeB": "Harmony",
+            "textB": "Практическая польза и мирное сотрудничество всегда важнее доказательства своей правоты."
+      },
+      {
+            "themeA": "Woo",
+            "textA": "Широкая сеть социальных связей — мой естественный образ жизни и главный капитал.",
+            "themeB": "Includer",
+            "textB": "Вместе мы сильнее — я строю инклюзивную атмосферу, где рады каждому участнику."
+      },
+      {
+            "themeA": "Adaptability",
+            "textA": "Я не испытываю стресса, если за пять минут до вылета всё расписание переворачивается.",
+            "themeB": "Individualization",
+            "textB": "Я интуитивно знаю, какой подарок или какие слова мотивации попадут человеку прямо в душу."
+      },
+      {
+            "themeA": "Positivity",
+            "textA": "Я притягиваю людей позитивным настроем и искренними комплиментами.",
+            "themeB": "Input",
+            "textB": "Знания — это стратегический запас, который рано или поздно выстрелит в бизнесе."
+      },
+      {
+            "themeA": "Relator",
+            "textA": "Крепкие проверенные связи для меня в сто раз ценнее сотни визиток из чатов.",
+            "themeB": "Intellection",
+            "textB": "Глубокие размышления заряжают мои интеллектуальные батареи лучше любого шума."
+      },
+      {
+            "themeA": "Analytical",
+            "textA": "Я чувствую ясность, когда перед глазами есть прозрачные графики, когорты и юнит-экономика.",
+            "themeB": "Learner",
+            "textB": "Я моментально осваиваю передовые нейросети и инструменты, опережая неповоротливых коллег."
+      },
+      {
+            "themeA": "Context",
+            "textA": "Погружение в исторический контекст дает мне надежный фундамент под ногами.",
+            "themeB": "Strategic",
+            "textB": "Мой ум постоянно играет в шахматы с реальностью на несколько ходов вперед."
+      },
+      {
+            "themeA": "Futuristic",
+            "textA": "Я заряжаюсь энергией, когда проектирую инновационные продукты следующего поколения.",
+            "themeB": "Achiever",
+            "textB": "Я чувствую себя продуктивным только тогда, когда каждый день закрываю конкретный осязаемый результат."
+      },
+      {
+            "themeA": "Ideation",
+            "textA": "Обычные вещи кажутся мне захватывающими, когда я нахожу в них скрытый концептуальный слой.",
+            "themeB": "Arranger",
+            "textB": "Я получаю кайф от перестройки хаотичных ресурсов и людей в идеальную работающую схему."
+      },
+      {
+            "themeA": "Belief",
+            "textA": "Для меня принципиально важно, чтобы проект строго совпадал с моими внутренними жизненными ценностями.",
+            "themeB": "Activator",
+            "textB": "Хватит бесконечно планировать — нужно запускать MVP и проверять всё на живом опыте."
+      },
+      {
+            "themeA": "Consistency",
+            "textA": "Правила, требования и регламенты должны быть абсолютно равными для всех без каких-либо исключений.",
+            "themeB": "Restorative",
+            "textB": "Я обожаю находить скрытые поломки, системные баги и реанимировать проблемные проекты."
+      },
+      {
+            "themeA": "Deliberative",
+            "textA": "Перед любым решением я сначала выявляю все скрытые угрозы, юридические риски и подводные камни.",
+            "themeB": "Communication",
+            "textB": "Я умею упаковать любую сложную идею в яркую историю, метафору и продающий питч."
+      },
+      {
+            "themeA": "Discipline",
+            "textA": "Мне жизненно необходим порядок, четкие списки, таймлайны и предсказуемый распорядок дня.",
+            "themeB": "Command",
+            "textB": "В кризисной ситуации я без колебаний беру штурвал на себя и ставлю жесткие условия."
+      },
+      {
+            "themeA": "Focus",
+            "textA": "Я выбираю одну главную финансовую цель и безжалостно отсекаю любые отвлекающие задачи.",
+            "themeB": "Competition",
+            "textB": "Меня зажигает победа над конкурентами — второе место для меня равносильно проигрышу."
+      },
+      {
+            "themeA": "Responsibility",
+            "textA": "Если я даю обещание, я расшибусь в лепешку, но выполню его с безупречным качеством.",
+            "themeB": "Maximizer",
+            "textB": "Я не трачу время на посредственность — беру работающее и вывожу его на уровень x10."
+      }
+]];
+
+    // STATE VARIABLES
+    let currentQuestions = [];
+    let currentIndex = 0;
+    let scores = {};
+    let timerInterval = null;
+    let timeRemaining = 20.0;
+    const TIME_LIMIT = 20.0;
+
+    // INIT SCORES
+    function resetScores() {
+      scores = {};
+      for (const themeKey in GALLUP_THEMES) {
+        scores[themeKey] = 0;
+      }
+    }
+
+    // START TEST
+    function startTest(count) {
+      resetScores();
+      currentQuestions = QUESTION_BANK.slice(0, count);
+      currentIndex = 0;
+
+      document.getElementById("screen-intro").classList.add("hidden");
+      document.getElementById("screen-results").classList.add("hidden");
+      document.getElementById("screen-test").classList.remove("hidden");
+
+      renderQuestion();
+    }
+
+    // RENDER CURRENT QUESTION
+    function renderQuestion() {
+      if (currentIndex >= currentQuestions.length) {
+        finishTest();
+        return;
+      }
+
+      const q = currentQuestions[currentIndex];
+      const total = currentQuestions.length;
+
+      // Update Header & Progress
+      document.getElementById("progress-text").innerText = `Вопрос ${currentIndex + 1} из ${total}`;
+      const progressPercent = ((currentIndex) / total) * 100;
+      document.getElementById("test-progress-bar").style.width = `${progressPercent}%`;
+
+      // Update Texts
+      document.getElementById("stmt-text-a").innerText = q.textA;
+      document.getElementById("stmt-text-b").innerText = q.textB;
+
+      // Domain Badges
+      const themeMetaA = GALLUP_THEMES[q.themeA];
+      const themeMetaB = GALLUP_THEMES[q.themeB];
+      document.getElementById("domain-badge-a").innerText = themeMetaA.domain;
+      document.getElementById("domain-badge-b").innerText = themeMetaB.domain;
+
+      // Start 20s Countdown Timer
+      startTimer();
+    }
+
+    // TIMER ENGINE (20 SECONDS WITH VISUAL DECAY)
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeRemaining = TIME_LIMIT;
+      updateTimerUI();
+
+      const startTime = Date.now();
+
+      timerInterval = setInterval(() => {
+        const elapsed = (Date.now() - startTime) / 1000;
+        timeRemaining = Math.max(0, TIME_LIMIT - elapsed);
+        updateTimerUI();
+
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          // Auto advance on timeout (Gallup standard)
+          autoAdvanceTimeout();
+        }
+      }, 100);
+    }
+
+    function updateTimerUI() {
+      const timerSecEl = document.getElementById("timer-seconds");
+      const timerBarEl = document.getElementById("question-timer-bar");
+
+      timerSecEl.innerText = `${timeRemaining.toFixed(1)}s`;
+
+      const barWidth = (timeRemaining / TIME_LIMIT) * 100;
+      timerBarEl.style.width = `${barWidth}%`;
+
+      if (timeRemaining > 10) {
+        timerSecEl.className = "px-2.5 py-0.5 rounded-lg bg-slate-800 text-emerald-400 border border-slate-700 text-base font-mono";
+        timerBarEl.className = "bg-emerald-500 h-full transition-all duration-100 ease-linear";
+      } else if (timeRemaining > 5) {
+        timerSecEl.className = "px-2.5 py-0.5 rounded-lg bg-amber-950/80 text-amber-300 border border-amber-600/50 text-base font-mono";
+        timerBarEl.className = "bg-amber-500 h-full transition-all duration-100 ease-linear";
+      } else {
+        timerSecEl.className = "px-2.5 py-0.5 rounded-lg bg-rose-950 text-rose-300 border border-rose-600 text-base font-mono urgent-timer";
+        timerBarEl.className = "bg-rose-500 h-full transition-all duration-100 ease-linear";
+      }
+    }
+
+    function autoAdvanceTimeout() {
+      // Record neutral (3) on timeout
+      recordScore(3);
+      nextQuestion();
+    }
+
+    // SUBMIT ANSWER (1 to 5)
+    function submitAnswer(val) {
+      clearInterval(timerInterval);
+      recordScore(val);
+      nextQuestion();
+    }
+
+    function skipQuestion() {
+      submitAnswer(3);
+    }
+
+    function recordScore(choice) {
+      const q = currentQuestions[currentIndex];
+      // Choice: 1 = Strong A (+3), 2 = Lean A (+1.5), 3 = Neutral (+0.5 both), 4 = Lean B (+1.5), 5 = Strong B (+3)
+      if (choice === 1) {
+        scores[q.themeA] += 3.0;
+        scores[q.themeB] += 0.0;
+      } else if (choice === 2) {
+        scores[q.themeA] += 1.8;
+        scores[q.themeB] += 0.4;
+      } else if (choice === 3) {
+        scores[q.themeA] += 0.8;
+        scores[q.themeB] += 0.8;
+      } else if (choice === 4) {
+        scores[q.themeA] += 0.4;
+        scores[q.themeB] += 1.8;
+      } else if (choice === 5) {
+        scores[q.themeA] += 0.0;
+        scores[q.themeB] += 3.0;
+      }
+    }
+
+    function nextQuestion() {
+      currentIndex++;
+      renderQuestion();
+    }
+
+    // FINISH TEST & CALCULATE RESULTS
+    function finishTest() {
+      clearInterval(timerInterval);
+      document.getElementById("screen-test").classList.add("hidden");
+      document.getElementById("screen-results").classList.remove("hidden");
+
+      // Sort themes by score descending
+      const sortedThemes = Object.keys(scores).map(key => {
+        return {
+          key: key,
+          score: scores[key],
+          meta: GALLUP_THEMES[key]
+        };
+      }).sort((a, b) => b.score - a.score);
+
+      const top5 = sortedThemes.slice(0, 5);
+      const top6to10 = sortedThemes.slice(5, 10);
+      const bottom3 = sortedThemes.slice(-3).reverse();
+
+      // Domain Scores
+      let domainTotals = { Executing: 0, Influencing: 0, Relationship: 0, Strategic: 0 };
+      sortedThemes.forEach(item => {
+        domainTotals[item.meta.domain] += item.score;
+      });
+      const grandTotal = Object.values(domainTotals).reduce((a, b) => a + b, 0) || 1;
+
+      const pExec = Math.round((domainTotals.Executing / grandTotal) * 100);
+      const pInf = Math.round((domainTotals.Influencing / grandTotal) * 100);
+      const pRel = Math.round((domainTotals.Relationship / grandTotal) * 100);
+      const pStrat = Math.round((domainTotals.Strategic / grandTotal) * 100);
+
+      document.getElementById("score-executing").innerText = `${pExec}%`;
+      document.getElementById("score-influencing").innerText = `${pInf}%`;
+      document.getElementById("score-relationship").innerText = `${pRel}%`;
+      document.getElementById("score-strategic").innerText = `${pStrat}%`;
+
+      // Render Top 5
+      const top5Container = document.getElementById("top5-container");
+      top5Container.innerHTML = "";
+      top5.forEach((item, idx) => {
+        const domainColor = getDomainBadgeColor(item.meta.domain);
+        const card = document.createElement("div");
+        card.className = "p-4 rounded-xl bg-slate-800/70 border border-slate-700/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+        card.innerHTML = `
+          <div class="flex items-start gap-3">
+            <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white font-black text-sm flex items-center justify-center shrink-0">
+              #${idx + 1}
+            </span>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white text-base">${item.meta.nameRu}</span>
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded ${domainColor}">
+                  ${item.meta.domain}
+                </span>
+              </div>
+              <p class="text-xs text-slate-300 mt-1">${item.meta.desc}</p>
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="text-xs font-mono text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-500/30 px-2 py-1 rounded">
+              Сила: ${item.score.toFixed(1)} pts
+            </span>
+          </div>
+        `;
+        top5Container.appendChild(card);
+      });
+
+      // Render Top 6-10
+      const top610Container = document.getElementById("top6-10-container");
+      top610Container.innerHTML = "";
+      top6to10.forEach((item, idx) => {
+        const domainColor = getDomainBadgeColor(item.meta.domain);
+        const div = document.createElement("div");
+        div.className = "p-3 rounded-xl bg-slate-800/40 border border-slate-700/40 flex items-center justify-between text-xs";
+        div.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-slate-400">#${idx + 6}</span>
+            <span class="font-semibold text-slate-200">${item.meta.nameRu.split(' ')[0]}</span>
+            <span class="text-[10px] px-1.5 py-0.2 rounded ${domainColor}">${item.meta.domain}</span>
+          </div>
+          <span class="text-slate-400 font-mono text-[11px]">${item.score.toFixed(1)} pts</span>
+        `;
+        top610Container.appendChild(div);
+      });
+
+      // Render Blind Spots
+      const blindSpotsContainer = document.getElementById("blind-spots-container");
+      blindSpotsContainer.innerHTML = "";
+      bottom3.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "p-3 rounded-xl bg-rose-950/30 border border-rose-500/20";
+        div.innerHTML = `
+          <div class="text-xs font-bold text-rose-300 mb-1">${item.meta.nameRu}</div>
+          <p class="text-[11px] text-slate-400">${item.meta.desc}</p>
+        `;
+        blindSpotsContainer.appendChild(div);
+      });
+
+      // Blind Spots Advice
+      document.getElementById("blind-spots-shield-advice").innerHTML = `
+        <b>🛡 Протокол защиты от сливов:</b> Ваши нижние таланты (${bottom3.map(b => b.key).join(", ")}) — это задачи, которые вы бессознательно прокрастинируете. 
+        <b>Решение:</b> Убрать их из своего календаря! Замените личный труд AI-агентами (парсеры, автопостинг, скрипты) или наймите ассистента с профилем <i>Executing</i>.
+      `;
+
+      // X10 Action Plan Generation
+      generateX10Plan(top5, domainTotals);
+    }
+
+    function getDomainBadgeColor(domain) {
+      if (domain === "Executing") return "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+      if (domain === "Influencing") return "bg-amber-500/20 text-amber-300 border border-amber-500/30";
+      if (domain === "Relationship") return "bg-blue-500/20 text-blue-300 border border-blue-500/30";
+      return "bg-purple-500/20 text-purple-300 border border-purple-500/30";
+    }
+
+    function generateX10Plan(top5, domainTotals) {
+      const container = document.getElementById("x10-action-plan");
+      const topKeys = top5.map(t => t.key);
+
+      let leadArchetype = "Стратег-Инноватор";
+      let offerStrategy = "Продажа высокочековых AI-решений и консалтинга";
+      let delegationTarget = "Операционный ассистент и проектный менеджер";
+
+      if (topKeys.includes("Activator") || topKeys.includes("Command") || topKeys.includes("Maximizer")) {
+        leadArchetype = "Дерзкий Фаундер-Запускатор (High-Speed Execution)";
+        offerStrategy = "Агрессивный запуск MVP за 48 часов, работа с крупными чеками ($2,000–$10,000+) и быстрая лидогенерация.";
+      } else if (topKeys.includes("Analytical") || topKeys.includes("Strategic") || topKeys.includes("Learner")) {
+        leadArchetype = "Интеллектуальный Архитектор и Траблшутер";
+        offerStrategy = "Глубокий аудит воронок, оцифровка бизнеса, разработка сложных кастомных AI-агентов под ключ.";
+      } else if (topKeys.includes("Relator") || topKeys.includes("Empathy") || topKeys.includes("Individualization")) {
+        leadArchetype = "Мастер Доверительных Партнерств и LTV";
+        offerStrategy = "Работа с постоянным пулом VIP-клиентов, глубинное сопровождение и удержание с чеком по подписке.";
+      }
+
+      container.innerHTML = `
+        <div class="p-4 rounded-xl bg-slate-800/80 border border-indigo-500/30">
+          <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-1">Ваш денежный архетип:</div>
+          <div class="text-base font-extrabold text-white mb-2">${leadArchetype}</div>
+          <p class="text-xs text-slate-300 leading-normal">
+            Ваш Top-5 (${topKeys.join(" + ")}) дает монопольное преимущество там, где требуется скорость, видение и качество.
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <div class="text-xs font-bold text-slate-300 uppercase tracking-wider">3 шага для x10 к доходу:</div>
+          <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 text-xs text-slate-300">
+            <b>1. Продукт и Оффер:</b> ${offerStrategy}
+          </div>
+          <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 text-xs text-slate-300">
+            <b>2. Освобождение времени:</b> Прекратить делать рутину. Нанять ${delegationTarget} или передать задачи AI-скриптам. Это высвободит вам 4+ часа в день на продажи и стратегию.
+          </div>
+          <div class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 text-xs text-slate-300">
+            <b>3. Модель монетизации:</b> Продавать через свои ведущие таланты: не имитировать чужой стиль, а вести диалог из позиции силы (${topKeys[0]} + ${topKeys[1]}).
+          </div>
+        </div>
+      `;
+    }
+
+    function restartTest() {
+      document.getElementById("screen-results").classList.add("hidden");
+      document.getElementById("screen-intro").classList.remove("hidden");
+    }
+
+
+    function handleLeadSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("lead-name").value.trim();
+      const tg = document.getElementById("lead-tg").value.trim();
+      const btn = document.getElementById("tg-lead-btn");
+      
+      btn.disabled = true;
+      btn.innerHTML = `<span>⏳ Отправка...</span>`;
+
+      // Extract Top 5 & domains
+      const top5List = Array.from(document.querySelectorAll("#top5-container .font-bold.text-white"))
+                            .map((el, i) => `#${i+1} ` + el.innerText).join("\n");
+      const exec = document.getElementById("score-executing").innerText;
+      const inf = document.getElementById("score-influencing").innerText;
+      const rel = document.getElementById("score-relationship").innerText;
+      const strat = document.getElementById("score-strategic").innerText;
+
+      const botToken = "6240637727:AAGZsu3ZOAinWoAJwTP11eJJv2M4qzCtx_g";
+      const chatId = "888005446";
+
+      const msgText = `🎯 НОВЫЙ ЛИД С ТЕСТА GALLUP!\n\n` +
+                      `👤 Имя: ${name}\n` +
+                      `📱 Telegram: ${tg}\n\n` +
+                      `🏆 Топ-5 талантов:\n${top5List}\n\n` +
+                      `📊 Баланс доменов:\n` +
+                      `• Исполнение: ${exec}\n` +
+                      `• Влияние: ${inf}\n` +
+                      `• Отношения: ${rel}\n` +
+                      `• Стратегия: ${strat}`;
+
+      // Background notification to admin
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text: msgText })
+      }).catch(() => {});
+
+      // Direct client Telegram message
+      const top5Short = Array.from(document.querySelectorAll("#top5-container .font-bold.text-white"))
+                             .map((el, i) => `#${i+1} ` + el.innerText.split(' ')[0]).join(", ");
+      const clientText = encodeURIComponent(`Привет! Я прошел(ла) тест Gallup.\nИмя: ${name} (${tg})\nМой Top-5: ${top5Short}\nХочу получить полный разбор связок и план монетизации!`);
+      const tgUrl = `https://t.me/nnsvt?text=${clientText}`;
+
+      setTimeout(() => {
+        btn.innerHTML = `<span>✅ Переходим в Telegram...</span>`;
+        window.open(tgUrl, "_blank");
+      }, 500);
+    }
+
+    function copyResultsToClipboard() {
+      const top5List = Array.from(document.querySelectorAll("#top5-container .font-bold.text-white"))
+                            .map((el, i) => `#${i+1} ` + el.innerText).join("\n");
+      const text = `РЕЗУЛЬТАТЫ GALLUP CLIFTONSTRENGTHS REAL:\n\nТОП-5 ТАЛАНТОВ:\n${top5List}\n\nДОМЕНЫ:\nИсполнение: ${document.getElementById("score-executing").innerText}\nВлияние: ${document.getElementById("score-influencing").innerText}\nОтношения: ${document.getElementById("score-relationship").innerText}\nСтратегия: ${document.getElementById("score-strategic").innerText}\n\nСгенерировано в Gallup Real Engine.`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById("copy-btn");
+        const orig = btn.innerText;
+        btn.innerText = "✅ Скопировано!";
+        btn.classList.add("bg-emerald-600");
+        setTimeout(() => {
+          btn.innerText = orig;
+          btn.classList.remove("bg-emerald-600");
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
