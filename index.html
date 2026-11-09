@@ -51,74 +51,145 @@
   <main class="w-full max-w-3xl">
 
     <!-- SCREEN 1: INTRO & MODE SELECT -->
-    <section id="screen-intro" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-sm">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-4">
-        💎 Научная методология CliftonStrengths
+        <!-- SCREEN 1: HIGH-CONVERTING LANDING & MODE SELECT -->
+    <section id="screen-intro" class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+      
+      <!-- TOP BADGE -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-amber-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-bold mb-5 shadow-sm">
+        <span>💎 Психометрический стандарт Fortune 500 для фаундеров и лидеров</span>
       </div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-4 leading-tight">
-        Как работает реальный Gallup и как он раскрывает x10 потенциал
+
+      <!-- MAIN HEADLINE -->
+      <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 leading-[1.15]">
+        Хватит ломать себя.<br>
+        <span class="bg-gradient-to-r from-indigo-400 via-purple-300 to-amber-300 bg-clip-text text-transparent">Узнайте свой денежный архетип</span> за 10 минут
       </h2>
-      <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-        Официальный опросник Gallup построен на 177 парах утверждений с лимитом ровно <b>20 секунд</b> на ответ. Это сделано для того, чтобы <b>отключить социальные фильтры</b> и зафиксировать естественные нейронные реакции мышления и лидерства.
+
+      <!-- SUBTITLE -->
+      <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6 max-w-2xl">
+        Научный опросник <b>CliftonStrengths (Gallup)</b> с жестким 20-секундным таймером. 
+        Выявите природный <b>Top-5 ваших талантов</b>, устраните скрытые утечки энергии и заберите персональную дорожную карту роста дохода в Telegram.
       </p>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-        <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50">
-          <div class="text-slate-200 font-bold text-sm mb-1">🎯 Фокус на сильных сторонах:</div>
-          <p class="text-xs text-slate-400 leading-normal">
-            Инвестиция времени в Top-5 талантов дает результат 10/10 — монопольное рыночное преимущество и максимальную маржинальность.
-          </p>
+      <!-- SOCIAL PROOF STATS -->
+      <div class="grid grid-cols-3 gap-2 sm:gap-4 py-3.5 px-4 rounded-xl bg-slate-800/50 border border-slate-700/60 mb-8 text-center">
+        <div>
+          <div class="text-xl sm:text-2xl font-black text-indigo-400">32M+</div>
+          <div class="text-[11px] text-slate-400">прошедших в мире</div>
         </div>
-        <div class="p-4 rounded-xl bg-indigo-950/40 border border-indigo-500/30">
-          <div class="text-indigo-400 font-bold text-sm mb-1">🛡 Защита от слепых зон:</div>
-          <p class="text-xs text-slate-300 leading-normal">
-            Выявление нижних талантов (Blind Spots) позволяет делегировать или автоматизировать рутину, предотвращая слив ресурсов и выгорание.
-          </p>
+        <div class="border-x border-slate-700/60">
+          <div class="text-xl sm:text-2xl font-black text-emerald-400">90%</div>
+          <div class="text-[11px] text-slate-400">компаний Fortune 500</div>
+        </div>
+        <div>
+          <div class="text-xl sm:text-2xl font-black text-amber-400">20 сек</div>
+          <div class="text-[11px] text-slate-400">таймер без самообмана</div>
         </div>
       </div>
 
-      <div class="space-y-3 mb-8">
-        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Выберите режим тестирования:</label>
+      <!-- PAIN SECTION -->
+      <div class="mb-8">
+        <div class="text-xs font-bold text-rose-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
+          <span>⚠️ Почему 9 из 10 экспертов и фаундеров буксуют и выгорают:</span>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <button onclick="startTest(20)" class="text-left p-3.5 rounded-xl border border-slate-700 hover:border-indigo-500 bg-slate-800/50 hover:bg-indigo-600/10 transition-all cursor-pointer group">
-            <div class="flex items-center justify-between mb-1">
-              <span class="font-bold text-white text-xs group-hover:text-indigo-300">⚡ Быстрый срез</span>
-              <span class="text-[10px] bg-slate-700 text-slate-300 font-bold px-1.5 py-0.5 rounded">20 пар</span>
+          <div class="p-4 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <div class="font-bold text-xs text-rose-300 mb-1">1. Качают свои слабости</div>
+            <p class="text-[11px] text-slate-400 leading-normal">Тратят 80% энергии на нелюбимую рутину (отчеты, таблицы), становясь уставшей посредственностью.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <div class="font-bold text-xs text-rose-300 mb-1">2. Синдром пожарного</div>
+            <p class="text-[11px] text-slate-400 leading-normal">Чинят косяки за команду своими руками вместо того, чтобы управлять и продавать на высокий чек.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-rose-950/20 border border-rose-500/20">
+            <div class="font-bold text-xs text-rose-300 mb-1">3. Копируют чужие стили</div>
+            <p class="text-[11px] text-slate-400 leading-normal">Пытаются продавать чужими шаблонами, убивая органическую харизму и доверие клиентов.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULA & 4 DOMAINS -->
+      <div class="mb-8 p-5 rounded-2xl bg-indigo-950/40 border border-indigo-500/30">
+        <div class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-1">💎 Научная формула капитализации:</div>
+        <div class="text-sm sm:text-base font-bold text-white mb-2">
+          Талант (природный дар) × Инвестиции (фокус, часы, AI) = Суперсила мирового уровня
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed mb-4">
+          Вместо подтягивания слабостей с 2 до 4 (где нет денег), вы гипер-инвестируете в свой Top-5 (с 8 до 10). Именно за этот топ-1% рынок платит рекордные чеки.
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+          <div class="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-semibold">Executing<br><span class="text-[10px] text-slate-400 font-normal">Исполнение в срок</span></div>
+          <div class="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 font-semibold">Influencing<br><span class="text-[10px] text-slate-400 font-normal">Влияние и чеки</span></div>
+          <div class="p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-300 font-semibold">Relationship<br><span class="text-[10px] text-slate-400 font-normal">Доверие и LTV</span></div>
+          <div class="p-2.5 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-300 font-semibold">Strategic<br><span class="text-[10px] text-slate-400 font-normal">Стратегия и рычаги</span></div>
+        </div>
+      </div>
+
+      <!-- WHAT YOU GET SECTION -->
+      <div class="mb-8">
+        <div class="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-3 flex items-center gap-1.5">
+          <span>🎁 Что вы получите по итогам диагностики:</span>
+        </div>
+        <div class="space-y-2 text-xs text-slate-300">
+          <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-800/40 border border-slate-700/50">
+            <span class="text-emerald-400 font-black text-sm">✔</span>
+            <div><b>Рейтинг Top-5 ваших главных талантов</b> — математический расчет вашей природной зоны гениальности.</div>
+          </div>
+          <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-800/40 border border-slate-700/50">
+            <span class="text-emerald-400 font-black text-sm">✔</span>
+            <div><b>Аудит слепых зон (Blind Spots)</b> — список задач, которые сжигают вашу энергию и которые нужно немедленно делегировать.</div>
+          </div>
+          <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-800/40 border border-slate-700/50">
+            <span class="text-emerald-400 font-black text-sm">✔</span>
+            <div><b>Персональная дорожная карта x10 в Telegram</b> — какой оффер продавать, кого нанять в команду и как вырасти в выручке.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE SELECTION -->
+      <div class="space-y-3 mb-6">
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">Выберите удобный режим и начните тест:</label>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <button onclick="startTest(20)" class="text-left p-4 rounded-xl border border-indigo-500/60 hover:border-indigo-400 bg-indigo-950/20 hover:bg-indigo-900/30 transition-all cursor-pointer group shadow-md shadow-indigo-500/10">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-black text-white text-sm group-hover:text-indigo-300">⚡ Быстрый срез</span>
+              <span class="text-[10px] bg-indigo-600 text-white font-bold px-2 py-0.5 rounded">20 пар</span>
             </div>
-            <div class="text-[11px] text-indigo-400 font-semibold mb-1">~5 минут</div>
+            <div class="text-xs text-indigo-400 font-bold mb-1">~5 минут</div>
             <p class="text-[11px] text-slate-400 leading-normal">
-              Экспресс-оценка доменов и Top-5.
+              Экспресс-разведка доменов, Top-5 талантов и слепых зон.
             </p>
           </button>
 
-          <button onclick="startTest(40)" class="text-left p-3.5 rounded-xl border border-slate-700 hover:border-purple-500 bg-slate-800/50 hover:bg-purple-600/10 transition-all cursor-pointer group">
-            <div class="flex items-center justify-between mb-1">
-              <span class="font-bold text-white text-xs group-hover:text-purple-300">🎯 Глубокий аудит</span>
-              <span class="text-[10px] bg-slate-700 text-slate-300 font-bold px-1.5 py-0.5 rounded">40 пар</span>
+          <button onclick="startTest(40)" class="text-left p-4 rounded-xl border border-purple-500/60 hover:border-purple-400 bg-purple-950/20 hover:bg-purple-900/30 transition-all cursor-pointer group shadow-md shadow-purple-500/10">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-black text-white text-sm group-hover:text-purple-300">🎯 Глубокий аудит</span>
+              <span class="text-[10px] bg-purple-600 text-white font-bold px-2 py-0.5 rounded">40 пар</span>
             </div>
-            <div class="text-[11px] text-purple-400 font-semibold mb-1">~12 минут</div>
+            <div class="text-xs text-purple-400 font-bold mb-1">~12 минут</div>
             <p class="text-[11px] text-slate-400 leading-normal">
-              Точная калибровка Золотой десятки (Top-10).
+              Точная калибровка полной Золотой десятки (Top-10).
             </p>
           </button>
 
-          <button onclick="startTest(177)" class="text-left p-3.5 rounded-xl border-2 border-indigo-500 bg-indigo-950/40 hover:bg-indigo-900/40 transition-all cursor-pointer group shadow-lg shadow-indigo-600/20">
-            <div class="flex items-center justify-between mb-1">
-              <span class="font-extrabold text-white text-xs group-hover:text-amber-300">🏆 Полный Gallup</span>
-              <span class="text-[10px] bg-indigo-600 text-white font-bold px-1.5 py-0.5 rounded">177 пар</span>
+          <button onclick="startTest(177)" class="text-left p-4 rounded-xl border-2 border-amber-500/80 bg-amber-950/20 hover:bg-amber-900/30 transition-all cursor-pointer group shadow-xl shadow-amber-500/10">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-black text-white text-sm group-hover:text-amber-300">🏆 Полный Gallup</span>
+              <span class="text-[10px] bg-amber-500 text-slate-950 font-black px-2 py-0.5 rounded">177 пар</span>
             </div>
-            <div class="text-[11px] text-emerald-400 font-semibold mb-1">~35–45 минут</div>
+            <div class="text-xs text-amber-400 font-bold mb-1">~35–45 минут</div>
             <p class="text-[11px] text-slate-300 leading-normal">
-              Официальный стандарт со строгим таймером 20 сек.
+              Официальный мировой стандарт с таймером 20 секунд.
             </p>
           </button>
         </div>
       </div>
 
-      <div class="flex items-center justify-between pt-4 border-t border-slate-800 text-xs text-slate-400">
-        <span>⏱ 20 секунд на вопрос (с авто-переходом)</span>
-        <span>🔒 Полная конфиденциальность</span>
+      <div class="flex flex-wrap items-center justify-between pt-4 border-t border-slate-800 text-xs text-slate-400 gap-2">
+        <span>⏱ Таймер: 20 секунд на каждый вопрос</span>
+        <span>🔒 Конфиденциальность гарантирована</span>
       </div>
+
     </section>
 
     <!-- SCREEN 2: ACTIVE QUESTION TEST -->
